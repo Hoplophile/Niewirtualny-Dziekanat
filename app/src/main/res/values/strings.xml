@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Niewirtualny Dziekanat</string>
+    <string name="title_activity_login">Numer albumu</string>
+
+    <!-- Strings related to login -->
+    <string name="login_field_hint">Numer albumu</string>
+    <string name="action_sign_in">Sprawdź</string>
+    <string name="error_invalid_number">Nieprawidłowy numer albumu</string>
+    <string name="error_field_required">Pole jest wymagane!</string>
+    <string name="no_such_number">Numer nie został znaleziony</string>
+</resources>

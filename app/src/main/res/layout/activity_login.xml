@@ -1,0 +1,91 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/login_activity_margin"
+    android:paddingLeft="@dimen/login_activity_margin"
+    android:paddingRight="@dimen/login_activity_margin"
+    android:paddingTop="@dimen/login_activity_margin"
+    tools:context="com.example.piotr.niewirtualnydziekanat.LoginActivity">
+
+
+    <!-- Login progress -->
+    <ProgressBar
+        android:id="@+id/login_progress"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30sp"
+        android:layout_marginBottom="40sp"
+        android:layout_centerHorizontal="true"
+        android:background="@mipmap/ic_launcher_foreground"
+        android:id="@+id/dep_logo"
+        />
+
+    <ScrollView
+        android:id="@+id/login_form"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/dep_logo">
+
+        <LinearLayout
+            android:id="@+id/email_login_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/album_number_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/login_field_hint"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/error_view"
+                    android:paddingStart="4sp"
+                    android:textSize="12sp"
+                    android:textColor="@color/red"
+                    android:visibility="gone"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/sign_in_button"
+                style="?android:textAppearanceSmall"
+                android:layout_marginTop="5sp"
+                android:text="@string/action_sign_in"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:gravity="right|center_vertical">
+
+        <ImageView
+            android:layout_width="30sp"
+            android:layout_height="30sp"
+            android:layout_marginLeft="5sp"
+            android:src="@drawable/st_logo"/>
+    </LinearLayout>
+</RelativeLayout>
