@@ -19,14 +19,13 @@
         android:visibility="gone" />
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="140sp"
+        android:layout_height="140sp"
         android:layout_marginTop="30sp"
-        android:layout_marginBottom="40sp"
+        android:layout_marginBottom="30sp"
         android:layout_centerHorizontal="true"
-        android:background="@mipmap/ic_launcher_foreground"
-        android:id="@+id/dep_logo"
-        />
+        android:background="@drawable/eaiiib_logo"
+        android:id="@+id/dep_logo" />
 
     <ScrollView
         android:id="@+id/login_form"
@@ -68,10 +67,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/sign_in_button"
-                style="?android:textAppearanceSmall"
+                android:background="@color/colorPrimaryDark"
                 android:layout_marginTop="5sp"
                 android:text="@string/action_sign_in"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="@color/colorAccent"/>
 
         </LinearLayout>
     </ScrollView>
