@@ -53,13 +53,13 @@
                     android:singleLine="true" />
 
                 <TextView
+                    android:id="@+id/error_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/error_view"
                     android:layout_marginStart="4sp"
-                    android:textSize="12sp"
                     android:textColor="@color/red"
-                    android:visibility="gone"/>
+                    android:textSize="12sp"
+                    android:visibility="gone" />
 
             </android.support.design.widget.TextInputLayout>
 
