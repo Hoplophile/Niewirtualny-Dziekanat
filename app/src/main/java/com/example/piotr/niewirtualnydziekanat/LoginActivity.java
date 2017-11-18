@@ -3,9 +3,10 @@ package com.example.piotr.niewirtualnydziekanat;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 
@@ -48,7 +49,6 @@ public class LoginActivity extends AppCompatActivity{
     private View mProgressView;
     private View mLoginFormView;
     private String albumNumber;
-    public String URL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +61,46 @@ public class LoginActivity extends AppCompatActivity{
             public void onClick(View view) {
                 attemptLogin();
             }
+        });
+
+        Button dstWebsiteButton = findViewById(R.id.district_website);
+        dstWebsiteButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("https://www.eaiib.agh.edu.pl/"));
+                startActivity(intent);
+            }
+        });
+
+        final Button openingHoursButton = findViewById(R.id.opening_hours);
+        openingHoursButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO popup showing opening hours
+            }
+        });
+
+        Button stFanPageButton = findViewById(R.id.st_fan_page);
+        stFanPageButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("https://www.facebook.com/agh.si.tech/"));
+                startActivity(intent);
+
+                //TODO invalid page id
+                /*try{
+                    context.getPackageManager().getPackageInfo("com.facebook.katana", 0);
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("fb://page/Hgsfo7tbdUK"));
+                    startActivity(intent);
+                } catch (Exception e){
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse("https://www.facebook.com/agh.si.tech/"));
+                    startActivity(intent);
+                }*/
+            }
+
         });
 
         errorView = findViewById(R.id.error_view);
@@ -141,12 +181,12 @@ public class LoginActivity extends AppCompatActivity{
 
         int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
-        mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+        mLoginFormView.setVisibility(show ? View.INVISIBLE : View.VISIBLE);
         mLoginFormView.animate().setDuration(shortAnimTime).alpha(
                 show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
-                mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+                mLoginFormView.setVisibility(show ? View.INVISIBLE : View.VISIBLE);
             }
         });
 
@@ -166,10 +206,11 @@ public class LoginActivity extends AppCompatActivity{
      */
     public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
-        private final String mEmail;
+        private final String albumNumber;
+        private final Context context = LoginActivity.this;
 
         UserLoginTask(String email) {
-            mEmail = email;
+            albumNumber = email;
         }
 
         @Override
@@ -180,8 +221,7 @@ public class LoginActivity extends AppCompatActivity{
                 // Simulate network access.
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
-                Toast.makeText(LoginActivity.this,
-                        "Coś poszło nie tak :c", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Coś poszło nie tak :c", Toast.LENGTH_SHORT).show();
                 return false;
             }
 
@@ -199,14 +239,13 @@ public class LoginActivity extends AppCompatActivity{
             showProgress(false);
 
             if (success) {
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                Intent intent = new Intent(context, MainActivity.class);
                 intent.putExtra("Album Number", albumNumber);
                 startActivity(intent);
-                mLoginFormView.setVisibility(View.GONE);
+                mLoginFormView.setVisibility(View.INVISIBLE);
                 overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
             } else {
-                Toast.makeText(LoginActivity.this,
-                        "Numer nie został znaleziony", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Numer nie został znaleziony", Toast.LENGTH_SHORT).show();
             }
         }
 
