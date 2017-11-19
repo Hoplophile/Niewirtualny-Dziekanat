@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/NiewirtualnyDziekanat.iml" filepath="$PROJECT_DIR$/NiewirtualnyDziekanat.iml" />
+      <module fileurl="file://E:\iotnw\NiewirtualnyDziekanat.iml" filepath="E:\iotnw\NiewirtualnyDziekanat.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/iotnw.iml" filepath="$PROJECT_DIR$/iotnw.iml" />
     </modules>
   </component>
 </project>
