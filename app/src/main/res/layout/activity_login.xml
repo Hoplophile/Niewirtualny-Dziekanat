@@ -85,7 +85,7 @@
         <Button
             android:layout_width="60sp"
             android:layout_height="60sp"
-            android:id="@+id/district_website"
+            android:id="@+id/department_website"
             android:background="@drawable/link_ic"/>
 
         <Button

@@ -63,8 +63,8 @@ public class LoginActivity extends AppCompatActivity{
             }
         });
 
-        Button dstWebsiteButton = findViewById(R.id.district_website);
-        dstWebsiteButton.setOnClickListener(new OnClickListener() {
+        Button dptWebsiteButton = findViewById(R.id.department_website);
+        dptWebsiteButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -87,7 +87,7 @@ public class LoginActivity extends AppCompatActivity{
         authoritiesButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO popup or activity showing district authorities
+                //TODO popup or activity showing department authorities
                 Toast.makeText(context, "A tu będą prodziekani, panie z dziekanatu itp.",
                         Toast.LENGTH_SHORT).show();
             }
