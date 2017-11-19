@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity{
     private EditText albumNumberView;
     private View mProgressView;
     private View mLoginFormView;
-    private String albumNumber;
+    private final Context context = LoginActivity.this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +77,19 @@ public class LoginActivity extends AppCompatActivity{
         openingHoursButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO popup showing opening hours
+                //TODO popup or activity showing opening hours
+                Toast.makeText(context, "Tu narazie jest ściernisco, ale będą godziny otwarcia",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        final Button authoritiesButton = findViewById(R.id.authorities);
+        authoritiesButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO popup or activity showing district authorities
+                Toast.makeText(context, "A tu będą prodziekani, panie z dziekanatu itp.",
+                        Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -89,7 +101,7 @@ public class LoginActivity extends AppCompatActivity{
                 intent.setData(Uri.parse("https://www.facebook.com/agh.si.tech/"));
                 startActivity(intent);
 
-                //TODO invalid page id
+                //TODO invalid facebook fanpage id
                 /*try{
                     context.getPackageManager().getPackageInfo("com.facebook.katana", 0);
                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("fb://page/Hgsfo7tbdUK"));
@@ -122,9 +134,8 @@ public class LoginActivity extends AppCompatActivity{
     }
 
     /**
-     * Attempts to sign in or register the account specified by the login form.
-     * If there are form errors (invalid email, missing fields, etc.), the
-     * errors are presented and no actual login attempt is made.
+     * Attempts to sign in the number. If there are form errors (empty/too short/long),
+     * the errors are presented and no actual login attempt is made.
      */
     private void attemptLogin() {
         if (mAuthTask != null) {
@@ -135,7 +146,7 @@ public class LoginActivity extends AppCompatActivity{
         errorView.setVisibility(View.GONE);
 
         // Store values at the time of the login attempt.
-        albumNumber = albumNumberView.getText().toString();
+        String albumNumber = albumNumberView.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
@@ -201,13 +212,11 @@ public class LoginActivity extends AppCompatActivity{
     }
 
     /**
-     * Represents an asynchronous login/registration task used to authenticate
-     * the user.
+     * Represents an asynchronous number checking task.
      */
     public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
         private final String albumNumber;
-        private final Context context = LoginActivity.this;
 
         UserLoginTask(String email) {
             albumNumber = email;
@@ -224,12 +233,6 @@ public class LoginActivity extends AppCompatActivity{
                 Toast.makeText(context, "Coś poszło nie tak :c", Toast.LENGTH_SHORT).show();
                 return false;
             }
-
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-            }
-
-            // TODO: register the new account here.
             return true;
         }
 

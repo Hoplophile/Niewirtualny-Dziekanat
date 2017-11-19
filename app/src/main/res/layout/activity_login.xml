@@ -93,7 +93,14 @@
             android:layout_height="60sp"
             android:id="@+id/opening_hours"
             android:background="@drawable/opening_hours_ic"
-            android:layout_marginLeft="30sp"/>
+            android:layout_marginStart="30sp"/>
+
+        <Button
+            android:layout_width="60sp"
+            android:layout_height="60sp"
+            android:id="@+id/authorities"
+            android:background="@drawable/authorities_ic"
+            android:layout_marginStart="30sp"/>
     </LinearLayout>
 
     <LinearLayout

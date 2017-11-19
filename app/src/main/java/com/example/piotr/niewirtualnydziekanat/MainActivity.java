@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         hello = findViewById(R.id.album_number);
         hello.setText(albumNumber);
 
-        display = (TextView) findViewById(R.id.textView);
+        display = findViewById(R.id.textView);
         //Will exectue on the server url address once it is established
         //For now it is just a random server for testing purposes
         new serverView().execute("http://hmkcode.appspot.com/rest/controller/get.json");
