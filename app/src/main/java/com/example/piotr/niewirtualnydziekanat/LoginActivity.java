@@ -239,12 +239,11 @@ public class LoginActivity extends AppCompatActivity{
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
-            content = HttpGet(serverAddress);
             try {
                 // Simulate network access.
                 Thread.sleep(2000);
-            } catch (InterruptedException e) {
+                content = HttpGet(serverAddress);
+            } catch (Exception e) {
                 Toast.makeText(context, "Coś poszło nie tak :c", Toast.LENGTH_SHORT).show();
                 return false;
             }
