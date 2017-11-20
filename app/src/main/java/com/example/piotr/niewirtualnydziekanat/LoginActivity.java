@@ -22,6 +22,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 /**
  * A login screen that offers login via email/password.
  */
@@ -147,6 +155,9 @@ public class LoginActivity extends AppCompatActivity{
 
         // Store values at the time of the login attempt.
         String albumNumber = albumNumberView.getText().toString();
+        //Will hold the server url address once it is established
+        //For now it is just a random server for testing purposes
+        String address = "http://hmkcode.appspot.com/rest/controller/get.json";
 
         boolean cancel = false;
         View focusView = null;
@@ -172,7 +183,7 @@ public class LoginActivity extends AppCompatActivity{
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            mAuthTask = new UserLoginTask(albumNumber);
+            mAuthTask = new UserLoginTask(albumNumber, address);
             mAuthTask.execute((Void) null);
         }
     }
@@ -217,15 +228,19 @@ public class LoginActivity extends AppCompatActivity{
     public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
         private final String albumNumber;
+        private String content;
+        private String serverAddress;
 
-        UserLoginTask(String email) {
+        UserLoginTask(String email, String address) {
             albumNumber = email;
+            content = "";
+            serverAddress = address;
         }
 
         @Override
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
-
+            content = HttpGet(serverAddress);
             try {
                 // Simulate network access.
                 Thread.sleep(2000);
@@ -244,6 +259,7 @@ public class LoginActivity extends AppCompatActivity{
             if (success) {
                 Intent intent = new Intent(context, MainActivity.class);
                 intent.putExtra("Album Number", albumNumber);
+                intent.putExtra("Server Content", content);
                 startActivity(intent);
                 mLoginFormView.setVisibility(View.INVISIBLE);
                 overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
@@ -258,5 +274,42 @@ public class LoginActivity extends AppCompatActivity{
             showProgress(false);
         }
     }
+
+    /**
+     * Performs the GET request on the server
+     * @param urlString is the url address of the server
+     * @return is the server content (converted to string) to be displayed
+     */
+    private String HttpGet(String urlString) {
+        String result = "";
+        try {
+            URL url = new URL(urlString);
+            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+            InputStream inputStream = new BufferedInputStream(urlConnection.getInputStream());
+            result = inputStreamToString(inputStream);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    /**
+     * Converts the input stream to string
+     */
+    private String inputStreamToString (InputStream is) {
+        String result = "";
+        String line = "";
+        BufferedReader br = new BufferedReader(new InputStreamReader(is));
+        try {
+            while ((line = br.readLine()) != null) {
+                result += line;
+            }
+            is.close();
+        } catch(IOException ioe) {
+            ioe.printStackTrace();
+        }
+        return result;
+    }
+    //TODO: further data conversion (to a JSON object maybe?)
 }
 
