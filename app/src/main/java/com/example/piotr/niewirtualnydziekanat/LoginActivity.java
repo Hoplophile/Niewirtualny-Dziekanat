@@ -22,6 +22,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -33,7 +37,7 @@ import java.net.URL;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity{
+public class LoginActivity extends AppCompatActivity {
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -51,6 +55,7 @@ public class LoginActivity extends AppCompatActivity{
      * Keep track of the login task to ensure we can cancel it if requested.
      */
     private UserLoginTask mAuthTask = null;
+    private OpeningHours openingHours = null;
 
     private TextView errorView;
     private EditText albumNumberView;
@@ -85,9 +90,8 @@ public class LoginActivity extends AppCompatActivity{
         openingHoursButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO popup or activity showing opening hours
-                Toast.makeText(context, "Tu narazie jest ściernisco, ale będą godziny otwarcia",
-                        Toast.LENGTH_SHORT).show();
+                //TODO: change to actual server address
+                showOpeningHours("http://hmkcode.appspot.com/rest/controller/get.json");
             }
         });
 
@@ -141,6 +145,11 @@ public class LoginActivity extends AppCompatActivity{
         }
     }
 
+    private void showOpeningHours(String address) {
+        openingHours = new OpeningHours(address);
+        openingHours.execute();
+    }
+
     /**
      * Attempts to sign in the number. If there are form errors (empty/too short/long),
      * the errors are presented and no actual login attempt is made.
@@ -189,7 +198,7 @@ public class LoginActivity extends AppCompatActivity{
     }
 
     private boolean isNumberValid(String number) {
-        return number.length()==6;
+        return number.length() == 6;
     }
 
     /**
@@ -220,6 +229,37 @@ public class LoginActivity extends AppCompatActivity{
                 mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
             }
         });
+    }
+
+    /**
+     * Performs the GET request on the server
+     *
+     * @param urlString is the url address of the server
+     * @return is the server content (converted to string) to be displayed
+     */
+    public String HttpGet(String urlString) {
+        String result = "";
+        try {
+            URL url = new URL(urlString);
+            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+            InputStream inputStream = new BufferedInputStream(urlConnection.getInputStream());
+            result = inputStreamToString(inputStream);
+        } catch (Exception e) {
+            Toast.makeText(context, "Coś poszło nie tak :c", Toast.LENGTH_SHORT).show();
+        }
+        return result;
+    }
+
+    public JSONArray stringToJSON(String text) {
+        JSONObject json = null;
+        JSONArray array = null;
+        try {
+            json = new JSONObject(text);
+            array = json.getJSONArray("articleList"); //TODO: change to actual array name
+        } catch (JSONException e) {
+            Toast.makeText(context, "Coś poszło nie tak :c", Toast.LENGTH_SHORT).show();
+        }
+        return array;
     }
 
     /**
@@ -261,7 +301,7 @@ public class LoginActivity extends AppCompatActivity{
                 intent.putExtra("Server Content", content);
                 startActivity(intent);
                 mLoginFormView.setVisibility(View.INVISIBLE);
-                overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             } else {
                 Toast.makeText(context, "Numer nie został znaleziony", Toast.LENGTH_SHORT).show();
             }
@@ -275,27 +315,9 @@ public class LoginActivity extends AppCompatActivity{
     }
 
     /**
-     * Performs the GET request on the server
-     * @param urlString is the url address of the server
-     * @return is the server content (converted to string) to be displayed
-     */
-    private String HttpGet(String urlString) {
-        String result = "";
-        try {
-            URL url = new URL(urlString);
-            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-            InputStream inputStream = new BufferedInputStream(urlConnection.getInputStream());
-            result = inputStreamToString(inputStream);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
-
-    /**
      * Converts the input stream to string
      */
-    private String inputStreamToString (InputStream is) {
+    private String inputStreamToString(InputStream is) {
         String result = "";
         String line = "";
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -304,11 +326,87 @@ public class LoginActivity extends AppCompatActivity{
                 result += line;
             }
             is.close();
-        } catch(IOException ioe) {
+        } catch (IOException ioe) {
             ioe.printStackTrace();
         }
         return result;
     }
     //TODO: further data conversion (to a JSON object maybe?)
+
+    /**
+     * Asynchronous task attempts to get data from the server
+     * then starts the Opening Hours Activity
+     * and displays opening hours
+     */
+    public class OpeningHours extends AsyncTask<Void, Void, Boolean> {
+
+        private String address;
+        private String content;
+        private JSONArray arr;
+        private String displayTitle;
+        private String[] titles;
+        private String[] hours;
+
+        OpeningHours(String text) {
+            address = text;
+            displayTitle = "GODZINY OTWARCIA DZIEKANATU";
+            titles = new String[]{};
+            hours = new String[]{};
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            try {
+                content = HttpGet(address);
+                arr = stringToJSON(content);
+                titles = getTitle();
+                hours = getTime();
+            } catch (ArrayIndexOutOfBoundsException e) {
+                return false;
+            }
+            return true;
+        }
+
+        /**
+         * Those two methods place the data received from the server into arrays
+         * which can later be passed through intent to another activity
+         */
+        private String[] getTitle() {
+            String[] myTitles = new String[arr.length()];
+            try {
+                for (int i = 0; i < arr.length(); ++i) {
+                    myTitles[i] = arr.getJSONObject(i).getString("title"); //TODO: update when the server is established
+                }
+            } catch (JSONException e) {
+                Toast.makeText(context, "cos poszlo nie tak w http get", Toast.LENGTH_SHORT).show();
+            }
+            return myTitles;
+        }
+
+        private String[] getTime() {
+            String[] myHours = new String[arr.length()];
+            try {
+                for (int i = 0; i < arr.length(); i++) {
+                    myHours[i] = arr.getJSONObject(i).getString("url"); //TODO: update when the server is established
+                }
+            } catch (JSONException e) {
+                Toast.makeText(context, "cos poszlo nie tak w http get", Toast.LENGTH_SHORT).show();
+            }
+            return myHours;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean success) {
+            if (success) {
+                Intent intent = new Intent(context, OpeningHoursActivity.class);
+                intent.putExtra("Opening Hours", displayTitle);
+                intent.putExtra("Array of titles", titles);
+                intent.putExtra("Array of hours", hours);
+                startActivity(intent);
+            } else {
+                Toast.makeText(context, "cos poszlo nie tak w post", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 }
 

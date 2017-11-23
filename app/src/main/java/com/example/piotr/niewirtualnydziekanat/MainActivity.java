@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         albumNumber = intent.getStringExtra("Album Number");
         serverContent = intent.getStringExtra("Server Content");
 
-        hello = findViewById(R.id.album_number);
+        hello = findViewById(R.id.title);
         hello.setText(albumNumber);
 
         display = findViewById(R.id.display);
