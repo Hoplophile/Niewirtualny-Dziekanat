@@ -28,7 +28,7 @@ public class OpeningHoursActivity extends AppCompatActivity {
         setContentView(R.layout.activity_opening_hours);
 
         Intent intent = getIntent();
-        title = (TextView) findViewById(R.id.title);
+        title = findViewById(R.id.title);
         title.setText(intent.getStringExtra("Opening Hours"));
 
         //those arrays will hold data to be displayed
@@ -37,7 +37,7 @@ public class OpeningHoursActivity extends AppCompatActivity {
         hours = intent.getStringArrayExtra("Array of hours");
         myList = new ArrayList<>();
 
-        lv = (ListView) findViewById(R.id.lv);
+        lv = findViewById(R.id.lv);
         initializer();
         adp = adapterMethod(myList);
         lv.setAdapter(adp);
