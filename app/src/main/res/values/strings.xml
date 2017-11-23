@@ -9,4 +9,5 @@
     <string name="error_field_required">Pole jest wymagane!</string>
     <string name="no_such_number">Numer nie został znaleziony</string>
     <string name="title_activity_opening_hours">OpeningHours</string>
+    <string name="title_activity_authorities">AuthoritiesActivity</string>
 </resources>

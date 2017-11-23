@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/authorities_item"
+    android:padding="6sp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Małgorzata Frączek"
+        android:id="@+id/authority_name"
+        android:textColor="@color/colorAccent"
+        android:textSize="23sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mikroelektronika w Technice i Medycynie"
+        android:textSize="16sp"
+        android:singleLine="true"
+        android:id="@+id/authority_role"
+        android:layout_below="@id/authority_name"
+        android:layout_toStartOf="@id/call_btn"/>
+
+    <Button
+        android:layout_width="40sp"
+        android:layout_height="40sp"
+        android:id="@+id/email_btn"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/email_ic"
+        android:layout_centerInParent="true"/>
+
+    <Button
+        android:layout_width="40sp"
+        android:layout_height="40sp"
+        android:id="@+id/call_btn"
+        android:layout_marginEnd="8sp"
+        android:layout_toStartOf="@id/email_btn"
+        android:background="@drawable/call_ic"
+        android:layout_centerVertical="true"/>
+
+</RelativeLayout>

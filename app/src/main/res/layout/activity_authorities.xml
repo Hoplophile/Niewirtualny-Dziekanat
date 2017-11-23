@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5sp"
+    android:orientation="vertical"
+    tools:context="com.example.piotr.niewirtualnydziekanat.AuthoritiesActivity">
+
+    <!--Background image-->
+    <ImageView
+        android:layout_width="210sp"
+        android:layout_height="210sp"
+        android:src="@drawable/eaiiib_logo"
+        android:layout_centerInParent="true"
+        android:alpha=".40"
+        android:id="@+id/imageView" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/authorities_view">
+
+    </ScrollView>
+</RelativeLayout>
