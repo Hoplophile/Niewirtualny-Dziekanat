@@ -99,9 +99,8 @@ public class LoginActivity extends AppCompatActivity {
         authoritiesButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO popup or activity showing department authorities
-                Toast.makeText(context, "A tu będą prodziekani, panie z dziekanatu itp.",
-                        Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(LoginActivity.this, AuthoritiesActivity.class);
+                startActivity(intent);
             }
         });
 
