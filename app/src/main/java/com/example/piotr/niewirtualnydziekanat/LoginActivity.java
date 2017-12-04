@@ -76,17 +76,8 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        Button dptWebsiteButton = findViewById(R.id.department_website);
-        dptWebsiteButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse("https://www.eaiib.agh.edu.pl/"));
-                startActivity(intent);
-            }
-        });
-
-        final Button openingHoursButton = findViewById(R.id.opening_hours);
+        /*
+        final Button openingHoursButton = findViewById(R.id.opening_hours);                         //TODO move it to drawer
         openingHoursButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -94,37 +85,7 @@ public class LoginActivity extends AppCompatActivity {
                 showOpeningHours("http://hmkcode.appspot.com/rest/controller/get.json");
             }
         });
-
-        final Button authoritiesButton = findViewById(R.id.authorities);
-        authoritiesButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, AuthoritiesActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        Button stFanPageButton = findViewById(R.id.st_fan_page);
-        stFanPageButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse("https://www.facebook.com/agh.si.tech/"));
-                startActivity(intent);
-
-                //TODO invalid facebook fanpage id
-                /*try{
-                    context.getPackageManager().getPackageInfo("com.facebook.katana", 0);
-                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("fb://page/Hgsfo7tbdUK"));
-                    startActivity(intent);
-                } catch (Exception e){
-                    Intent intent = new Intent(Intent.ACTION_VIEW);
-                    intent.setData(Uri.parse("https://www.facebook.com/agh.si.tech/"));
-                    startActivity(intent);
-                }*/
-            }
-
-        });
+        */
 
         errorView = findViewById(R.id.error_view);
         albumNumberView = findViewById(R.id.album_number_view);
@@ -295,7 +256,7 @@ public class LoginActivity extends AppCompatActivity {
             showProgress(false);
 
             if (success) {
-                Intent intent = new Intent(context, MainActivity.class);
+                Intent intent = new Intent(context, DeaneryActivity.class);
                 intent.putExtra("Album Number", albumNumber);
                 intent.putExtra("Server Content", content);
                 startActivity(intent);

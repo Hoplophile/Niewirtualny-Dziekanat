@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_start"
+            android:icon="@drawable/ic_launcher_background"
+            android:title="Start" />
+        <item
+            android:id="@+id/nav_authorities"
+            android:icon="@drawable/authorities_ic"
+            android:title="Władze wydziału" />
+        <item
+            android:id="@+id/nav_opening_hours"
+            android:icon="@drawable/opening_hours_ic"
+            android:title="Godziny otwarcia" />
+        <item
+            android:id="@+id/nav_deanery"
+            android:icon="@drawable/ic_launcher_background"
+            android:title="Dziekanat" />
+        <item
+            android:id="@+id/nav_syllabus"
+            android:icon="@drawable/ic_launcher_background"
+            android:title="Syllabus" />
+        <item
+            android:id="@+id/nav_timetable"
+            android:icon="@drawable/ic_launcher_background"
+            android:title="Plany zajęć" />
+        <item
+            android:id="@+id/nav_skos"
+            android:icon="@drawable/ic_launcher_background"
+            android:title="SKOS" />
+        <item
+            android:id="@+id/nav_site"
+            android:icon="@drawable/link_ic"
+            android:title="Strona wydziału" />
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/ic_launcher_background"
+            android:title="O aplikacji" />
+    </group>
+</menu>

@@ -12,31 +12,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
-        </activity>
-
+        <activity android:name=".DeaneryActivity" />
         <activity
             android:name=".LoginActivity"
-            android:label="@string/app_name"
-            android:windowSoftInputMode="adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
+            android:label="Logowanie"
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity android:name=".OpeningHoursActivity" />
-
         <activity
             android:name=".AuthoritiesActivity"
-            android:label="Władze wydziału">
+            android:label="Władze wydziału"></activity>
+        <activity
+            android:name=".MainActivity"
+            android:label="Niewirtualny Dziekanat"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
 
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
         </activity>
+        <activity android:name=".SyllabusActivity"></activity>
     </application>
 
 </manifest>
