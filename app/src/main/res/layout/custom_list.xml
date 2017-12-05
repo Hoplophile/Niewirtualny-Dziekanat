@@ -13,8 +13,8 @@
         android:layout_marginTop="10dp"
         android:text="Studia Stacjonarne"
         android:textAlignment="center"
-        android:textColor="#06304C"
-        android:textStyle="bold"/>
+        android:textColor="@color/black"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/content"
@@ -23,6 +23,6 @@
         android:layout_marginBottom="10dp"
         android:text="godziny otwarcia"
         android:textAlignment="center"
-        android:textColor="#06304C"/>
+        android:textColor="#2F4F4F" />
 
 </LinearLayout>

@@ -7,12 +7,13 @@
     tools:context="com.example.piotr.niewirtualnydziekanat.OpeningHoursActivity">
 
     <ImageView
-        android:layout_width="210sp"
-        android:layout_height="210sp"
-        android:src="@drawable/eaiiib_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/bg_e"
         android:layout_centerInParent="true"
         android:alpha=".40"
-        android:id="@+id/imageView" />
+        android:id="@+id/background" />
 
     <TextView
         android:id="@+id/title"
@@ -25,7 +26,8 @@
         android:text="title"
         android:textAlignment="center"
         android:textColor="@color/colorAccent"
-        android:textSize="30sp" />
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
     <ListView
         android:id="@+id/lv"

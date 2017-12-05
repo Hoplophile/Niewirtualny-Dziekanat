@@ -62,7 +62,8 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
 
         } else if (id == R.id.nav_opening_hours) {
-            //TODO open activity
+            Intent intent = new Intent(context, OpeningHoursActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_deanery) {
             Intent intent = new Intent(context, LoginActivity.class);

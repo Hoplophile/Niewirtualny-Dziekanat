@@ -55,7 +55,7 @@ public class LoginActivity extends AppCompatActivity {
      * Keep track of the login task to ensure we can cancel it if requested.
      */
     private UserLoginTask mAuthTask = null;
-    private OpeningHours openingHours = null;
+//    private OpeningHours openingHours = null;
 
     private TextView errorView;
     private EditText albumNumberView;
@@ -105,10 +105,10 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void showOpeningHours(String address) {
+   /* private void showOpeningHours(String address) {
         openingHours = new OpeningHours(address);
         openingHours.execute();
-    }
+    }*/
 
     /**
      * Attempts to sign in the number. If there are form errors (empty/too short/long),
