@@ -3,7 +3,10 @@ package com.example.piotr.niewirtualnydziekanat;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -12,7 +15,7 @@ import android.widget.ScrollView;
 
 import java.lang.reflect.Array;
 
-public class AuthoritiesActivity extends AppCompatActivity {
+public class AuthoritiesActivity extends NavigationActivity {
 
     String auth_name[] = {"Małgorzata Tabor", "Alina Wącławska", "Małgorzata Frączek", "Angelika Burgknap-Rumian", "Małgorzata Frączek"};
     String ext_name = "Anna Jasuba";
@@ -50,5 +53,17 @@ public class AuthoritiesActivity extends AppCompatActivity {
         final AuthorityItem authorityItem2 =
                 new AuthorityItem(context,others_name[1],others_role[1]);
         othersList.addView(authorityItem2);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
     }
 }

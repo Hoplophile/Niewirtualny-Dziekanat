@@ -4,27 +4,24 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.webkit.WebView;
 
-public class MainActivity extends NavigationActivity {
+public class NavigationActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener{
 
-    Context context = MainActivity.this;
+
+    Context context = NavigationActivity.this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.nav_drawer);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -38,7 +35,7 @@ public class MainActivity extends NavigationActivity {
         navigationView.setNavigationItemSelectedListener(this);
     }
 
-   /* @Override
+    @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -55,6 +52,8 @@ public class MainActivity extends NavigationActivity {
         int id = item.getItemId();
 
         if (id == R.id.nav_start) {
+            Intent intent = new Intent(context, MainActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_authorities) {
             Intent intent = new Intent(context, AuthoritiesActivity.class);
@@ -93,5 +92,5 @@ public class MainActivity extends NavigationActivity {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }*/
+    }
 }

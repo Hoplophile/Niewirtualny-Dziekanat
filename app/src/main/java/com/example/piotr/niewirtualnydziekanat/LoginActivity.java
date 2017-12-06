@@ -8,12 +8,16 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 
 import android.os.AsyncTask;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -292,81 +296,5 @@ public class LoginActivity extends AppCompatActivity {
         return result;
     }
     //TODO: further data conversion (to a JSON object maybe?)
-
-    /**
-     * Asynchronous task attempts to get data from the server
-     * then starts the Opening Hours Activity
-     * and displays opening hours
-     */
-    public class OpeningHours extends AsyncTask<Void, Void, Boolean> {
-
-        private String address;
-        private String content;
-        private JSONArray arr;
-        private String displayTitle;
-        private String[] titles;
-        private String[] hours;
-
-        OpeningHours(String text) {
-            address = text;
-            displayTitle = "GODZINY OTWARCIA DZIEKANATU";
-            titles = new String[]{};
-            hours = new String[]{};
-        }
-
-        @Override
-        protected Boolean doInBackground(Void... params) {
-            try {
-                content = HttpGet(address);
-                arr = stringToJSON(content);
-                titles = getTitle();
-                hours = getTime();
-            } catch (ArrayIndexOutOfBoundsException e) {
-                return false;
-            }
-            return true;
-        }
-
-        /**
-         * Those two methods place the data received from the server into arrays
-         * which can later be passed through intent to another activity
-         */
-        private String[] getTitle() {
-            String[] myTitles = new String[arr.length()];
-            try {
-                for (int i = 0; i < arr.length(); ++i) {
-                    myTitles[i] = arr.getJSONObject(i).getString("title"); //TODO: update when the server is established
-                }
-            } catch (JSONException e) {
-                Toast.makeText(context, "cos poszlo nie tak w http get", Toast.LENGTH_SHORT).show();
-            }
-            return myTitles;
-        }
-
-        private String[] getTime() {
-            String[] myHours = new String[arr.length()];
-            try {
-                for (int i = 0; i < arr.length(); i++) {
-                    myHours[i] = arr.getJSONObject(i).getString("url"); //TODO: update when the server is established
-                }
-            } catch (JSONException e) {
-                Toast.makeText(context, "cos poszlo nie tak w http get", Toast.LENGTH_SHORT).show();
-            }
-            return myHours;
-        }
-
-        @Override
-        protected void onPostExecute(Boolean success) {
-            if (success) {
-                Intent intent = new Intent(context, OpeningHoursActivity.class);
-                intent.putExtra("Opening Hours", displayTitle);
-                intent.putExtra("Array of titles", titles);
-                intent.putExtra("Array of hours", hours);
-                startActivity(intent);
-            } else {
-                Toast.makeText(context, "cos poszlo nie tak w post", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
 }
 
