@@ -35,8 +35,7 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-        <activity android:name=".SyllabusActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".SyllabusActivity"/>
     </application>
 
 </manifest>
