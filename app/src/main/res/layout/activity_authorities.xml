@@ -7,14 +7,6 @@
     tools:context="com.example.piotr.niewirtualnydziekanat.AuthoritiesActivity">
 
     <!--Background Image-->
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-        android:scaleType="fitXY"
-        android:src="@drawable/bg_e"
-        android:layout_centerInParent="true"
-        android:alpha=".40"
-        android:id="@+id/background" />
 
     <ScrollView
         android:layout_width="match_parent"
