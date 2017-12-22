@@ -15,5 +15,11 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
+    <!-- Main acivity buttons -->
+    <string name="login_button">Logowanie</string>
+    <string name="wd_button">Wirtualny Dziekanat</string>
+    <string name="hours_button">Godziny otwarcia</string>
+    <string name="staff_button">Kontakt</string>
+
     <string name="action_settings">Settings</string>
 </resources>

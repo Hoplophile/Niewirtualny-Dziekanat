@@ -8,7 +8,6 @@
     android:paddingTop="@dimen/login_activity_margin"
     tools:context="com.example.piotr.niewirtualnydziekanat.LoginActivity">
 
-
     <!-- Login progress -->
     <ProgressBar
         android:id="@+id/login_progress"
@@ -74,6 +73,7 @@
                 android:textColor="@color/colorAccent"/>
 
         </LinearLayout>
+
     </ScrollView>
 
 </RelativeLayout>

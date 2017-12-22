@@ -6,7 +6,7 @@
     android:orientation="vertical"
     tools:context="com.example.piotr.niewirtualnydziekanat.AuthoritiesActivity">
 
-    <!--Background Image-->
+    <include layout="@layout/content_main" />
 
     <ScrollView
         android:layout_width="match_parent"

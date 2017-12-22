@@ -15,14 +15,17 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".DeaneryActivity"
-            android:label="Dziekanat"/>
+            android:label="Dziekanat"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".LoginActivity"
             android:label="Logowanie"
+            android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".OpeningHoursActivity"
             android:theme="@style/AppTheme.NoActionBar"
+            android:label="Godziny otwarcia"
             android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".AuthoritiesActivity"
