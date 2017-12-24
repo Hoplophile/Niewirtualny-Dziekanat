@@ -20,7 +20,8 @@
         <WebView
             android:id="@+id/syllabus_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:paddingTop="56sp"/>
 
         <include
             layout="@layout/app_bar_main"

@@ -11,13 +11,15 @@ import android.webkit.WebViewClient;
 
 public class SyllabusActivity extends NavigationActivity {
 
+    private final String url="https://syllabuskrk.agh.edu.pl/2016-2017/pl/treasuries/academy_units/16/study_plans";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_syllabus);
 
-        WebView syllabusView = findViewById(R.id.syllabus_view);
-        syllabusView.loadUrl("https://syllabuskrk.agh.edu.pl/2013-2014/pl/treasuries/academy_units/16/study_plans");
+
+        final WebView syllabusView = findViewById(R.id.syllabus_view);
         syllabusView.setWebViewClient(new WebViewClient(){
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
@@ -25,6 +27,8 @@ public class SyllabusActivity extends NavigationActivity {
                 return false;
             }
         });
+
+        syllabusView.loadUrl(url);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -39,4 +43,13 @@ public class SyllabusActivity extends NavigationActivity {
         navigationView.setNavigationItemSelectedListener(this);
     }
 
+    @Override
+    public void onBackPressed(){
+        final WebView syllabusView = findViewById(R.id.syllabus_view);
+        if(syllabusView.canGoBack()){
+            syllabusView.goBack();
+        } else{
+            super.onBackPressed();
+        }
+    }
 }

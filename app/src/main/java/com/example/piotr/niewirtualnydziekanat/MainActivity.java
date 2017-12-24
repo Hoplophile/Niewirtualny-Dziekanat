@@ -13,7 +13,7 @@ import android.widget.Button;
 
 public class MainActivity extends NavigationActivity {
 
-    Context context = MainActivity.this;
+    private final Context context = MainActivity.this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,60 +70,4 @@ public class MainActivity extends NavigationActivity {
         navigationView.setNavigationItemSelectedListener(this);
     }
 
-   /* @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_start) {
-
-        } else if (id == R.id.nav_authorities) {
-            Intent intent = new Intent(context, AuthoritiesActivity.class);
-            startActivity(intent);
-
-        } else if (id == R.id.nav_opening_hours) {
-            Intent intent = new Intent(context, OpeningHoursActivity.class);
-            startActivity(intent);
-
-        } else if (id == R.id.nav_deanery) {
-            Intent intent = new Intent(context, LoginActivity.class);
-            startActivity(intent);
-
-        } else if (id == R.id.nav_syllabus) {
-            Intent intent = new Intent(context, SyllabusActivity.class);
-            startActivity(intent);
-
-        } else if (id == R.id.nav_timetable) {
-            //TODO activity containing timetable content
-
-        } else if (id == R.id.nav_skos) {
-            //TODO activity containing SKOS content
-
-        } else if (id == R.id.nav_site) {
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setData(Uri.parse("https://www.eaiib.agh.edu.pl/"));
-            startActivity(intent);
-
-        } else if (id == R.id.nav_about) {
-            //TODO activity with info about authors and app
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setData(Uri.parse("https://www.facebook.com/agh.si.tech/"));
-            startActivity(intent);
-        }
-
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }*/
 }

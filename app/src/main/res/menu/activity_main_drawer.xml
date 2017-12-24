@@ -6,8 +6,12 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_start"
-            android:icon="@drawable/ic_launcher_background"
+            android:icon="@drawable/home_ic"
             android:title="Start" />
+        <item
+            android:id="@+id/nav_deanery"
+            android:icon="@drawable/login_ic"
+            android:title="Logowanie" />
         <item
             android:id="@+id/nav_authorities"
             android:icon="@drawable/authorities_ic"
@@ -16,10 +20,6 @@
             android:id="@+id/nav_opening_hours"
             android:icon="@drawable/opening_hours_ic"
             android:title="Godziny otwarcia" />
-        <item
-            android:id="@+id/nav_deanery"
-            android:icon="@drawable/ic_launcher_background"
-            android:title="Dziekanat" />
         <item
             android:id="@+id/nav_syllabus"
             android:icon="@drawable/ic_launcher_background"

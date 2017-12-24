@@ -5,6 +5,7 @@
     android:background="#1A5076"
     android:orientation="horizontal"
     android:gravity="center"
+    android:paddingTop="15sp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView

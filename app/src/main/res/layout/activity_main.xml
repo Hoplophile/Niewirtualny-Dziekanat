@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
     tools:context="com.example.piotr.niewirtualnydziekanat.MainActivity">
 
-    <include layout="@layout/content_main" />
-
     <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -27,7 +25,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingTop="56sp">
 
                 <ImageView
                     android:id="@+id/dep_logo"
@@ -35,7 +34,7 @@
                     android:layout_height="140sp"
                     android:layout_gravity="center"
                     android:layout_marginBottom="30sp"
-                    android:layout_marginTop="100sp"
+                    android:layout_marginTop="30sp"
                     android:background="@drawable/eaiiib_logo" />
 
                 <Button

@@ -20,6 +20,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -79,21 +80,22 @@ public class LoginActivity extends NavigationActivity {
             }
         });
 
-        /*
-        final Button openingHoursButton = findViewById(R.id.opening_hours);                         //TODO move it to drawer
-        openingHoursButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //TODO: change to actual server address
-                showOpeningHours("http://hmkcode.appspot.com/rest/controller/get.json");
-            }
-        });
-        */
-
         errorView = findViewById(R.id.error_view);
         albumNumberView = findViewById(R.id.album_number_view);
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
     }
 
     /**
@@ -107,11 +109,6 @@ public class LoginActivity extends NavigationActivity {
             }
         }
     }
-
-   /* private void showOpeningHours(String address) {
-        openingHours = new OpeningHours(address);
-        openingHours.execute();
-    }*/
 
     /**
      * Attempts to sign in the number. If there are form errors (empty/too short/long),

@@ -5,17 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.piotr.niewirtualnydziekanat.MainActivity"
-    tools:showIn="@layout/app_bar_main">
+    tools:context="com.example.piotr.niewirtualnydziekanat.MainActivity">
 
     <!--Background Image-->
-    <ImageView
+    <!--Hiding for now. For me app looks better without it
+        <ImageView
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
+        android:layout_marginTop="65dp"
         android:scaleType="fitXY"
         android:src="@drawable/bg_e"
         android:layout_centerInParent="true"
         android:alpha=".40"
-        android:id="@+id/background"/>
+        android:id="@+id/background"/>-->
 
 </android.support.constraint.ConstraintLayout>
