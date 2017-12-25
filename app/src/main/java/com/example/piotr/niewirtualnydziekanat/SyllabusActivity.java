@@ -20,11 +20,18 @@ public class SyllabusActivity extends NavigationActivity {
 
 
         final WebView syllabusView = findViewById(R.id.syllabus_view);
+        syllabusView.getSettings().setJavaScriptEnabled(true);
         syllabusView.setWebViewClient(new WebViewClient(){
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 view.loadUrl(request.getUrl().toString());
                 return false;
+            }
+            @Override
+            public void onPageFinished(WebView webview, String url){
+                //webview.loadUrl("javascript:(function() { document.getElementsByTagName" +
+                //        "('main-content')[0].style.display=\"none\"; })()");
+                //TODO DELETE FEEDBACK ICON
             }
         });
 

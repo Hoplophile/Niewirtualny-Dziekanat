@@ -50,25 +50,25 @@ public class AuthoritiesActivity extends NavigationActivity {
         LinearLayout extramuralList = findViewById(R.id.extramural_list);
         LinearLayout othersList = findViewById(R.id.others_list);
 
-        PopupWindow popupWindow = new PopupWindow(this);
-
         for (int i = 0; i < dean_name.length; i++) {
             HashMap<String, String> map = new HashMap<>();
             map.put("Name", dean_name[i]);
             map.put("Role", dean_role[i]);
             mList.add(map);
         }
-        SimpleAdapter adapter = new SimpleAdapter(context, mList, R.layout.authorities_list_item,
-                new String[] {"Name", "Role"}, new int[] {R.id.authority_name, R.id.authority_role});
-        ListView listView = findViewById(R.id.deans_list);
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        ListAdapter adapter = new SimpleAdapter(context,
+                mList,
+                R.layout.authorities_list_item,
+                new String[] {"Name", "Role"},
+                new int[] {R.id.authority_name, R.id.authority_role});
+        deansList.setAdapter(adapter);
+        deansList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
             }
         });
-
+/*
         for(int i=0; i<auth_name.length; i++){
             final AuthorityItem authorityItem =
                     new AuthorityItem(context,auth_name[i],auth_role[i]);
@@ -86,7 +86,7 @@ public class AuthoritiesActivity extends NavigationActivity {
         final AuthorityItem authorityItem2 =
                 new AuthorityItem(context,others_name[1],others_role[1]);
         othersList.addView(authorityItem2);
-
+*/
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
