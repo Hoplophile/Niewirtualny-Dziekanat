@@ -22,15 +22,15 @@
             android:title="Godziny otwarcia" />
         <item
             android:id="@+id/nav_syllabus"
-            android:icon="@drawable/ic_launcher_background"
+            android:icon="@drawable/syllabus_ic"
             android:title="Syllabus" />
         <item
             android:id="@+id/nav_timetable"
-            android:icon="@drawable/ic_launcher_background"
+            android:icon="@drawable/timetable_ic"
             android:title="Plany zajęć" />
         <item
             android:id="@+id/nav_skos"
-            android:icon="@drawable/ic_launcher_background"
+            android:icon="@drawable/skos_ic"
             android:title="SKOS" />
         <item
             android:id="@+id/nav_site"
@@ -38,7 +38,7 @@
             android:title="Strona wydziału" />
         <item
             android:id="@+id/nav_about"
-            android:icon="@drawable/ic_launcher_background"
+            android:icon="@drawable/st_logo"
             android:title="O aplikacji" />
     </group>
 </menu>

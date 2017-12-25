@@ -14,6 +14,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".MainActivity"
+            android:label="Niewirtualny Dziekanat"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".DeaneryActivity"
             android:label="Dziekanat"
             android:theme="@style/AppTheme.NoActionBar"/>
@@ -32,18 +41,16 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:label="Władze wydziału"/>
         <activity
-            android:name=".MainActivity"
-            android:label="Niewirtualny Dziekanat"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <category android:name="android.intent.category.LAUNCHER" />
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name=".SyllabusActivity"
             android:label="Syllabus"
             android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".TimetableActivity"
+            android:label="Plan Zajęć"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".SkosActivity"
+            android:label="SKOS"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
-
 </manifest>

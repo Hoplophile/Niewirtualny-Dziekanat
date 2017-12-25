@@ -1,37 +1,37 @@
 package com.example.piotr.niewirtualnydziekanat;
 
-import android.content.Context;
-import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.widget.TextView;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
-public class DeaneryActivity extends NavigationActivity {
+/**
+ * Created by piotr on 25.12.2017.
+ */
 
-    private TextView hello;
-    private String albumNumber;
-    private TextView display;
-    private String serverContent;
-    private final Context context = DeaneryActivity.this;
+public class SkosActivity extends NavigationActivity {
+    private final String url="https://skos.agh.edu.pl/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_deanery);
+        setContentView(R.layout.activity_skos);
 
-        Intent intent = getIntent();
-        albumNumber = intent.getStringExtra("Album Number");
-        serverContent = intent.getStringExtra("Server Content");
 
-        hello = findViewById(R.id.title);
-        hello.setText(albumNumber);
+        final WebView syllabusView = findViewById(R.id.skos_view);
+        syllabusView.setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                view.loadUrl(request.getUrl().toString());
+                return false;
+            }
+        });
 
-        display = findViewById(R.id.display);
-        display.setText(serverContent);
+        syllabusView.loadUrl(url);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -46,6 +46,4 @@ public class DeaneryActivity extends NavigationActivity {
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
     }
-
-    //TODO: enable other http requests (POST, DELETE)
 }

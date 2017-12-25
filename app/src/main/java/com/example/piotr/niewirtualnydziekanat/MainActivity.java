@@ -1,5 +1,6 @@
 package com.example.piotr.niewirtualnydziekanat;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -33,9 +34,15 @@ public class MainActivity extends NavigationActivity {
         deaneryWebsiteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse("https://dziekanat.agh.edu.pl/"));
-                startActivity(intent);
+                try{
+                    Intent intent = context.getPackageManager()
+                            .getLaunchIntentForPackage("pl.janpogocki.agh.wirtualnydziekanat");
+                    context.startActivity(intent);
+                } catch (ActivityNotFoundException e) {
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse("https://dziekanat.agh.edu.pl/"));
+                    startActivity(intent);
+                }
             }
         });
 
@@ -68,6 +75,7 @@ public class MainActivity extends NavigationActivity {
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setItemIconTintList(null);
     }
 
 }

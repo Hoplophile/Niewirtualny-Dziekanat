@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.piotr.niewirtualnydziekanat.SyllabusActivity">
+    tools:context="com.example.piotr.niewirtualnydziekanat.SkosActivity">
 
     <android.support.v4.widget.DrawerLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -18,9 +18,9 @@
         tools:openDrawer="start">
 
         <WebView
-            android:id="@+id/syllabus_view"
+            android:id="@+id/skos_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="?attr/actionBarSize"/>
 
         <include

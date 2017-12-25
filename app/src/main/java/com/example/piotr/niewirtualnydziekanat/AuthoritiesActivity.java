@@ -98,5 +98,6 @@ public class AuthoritiesActivity extends NavigationActivity {
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setItemIconTintList(null);
     }
 }

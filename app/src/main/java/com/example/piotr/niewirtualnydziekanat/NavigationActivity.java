@@ -31,10 +31,6 @@ public class NavigationActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
 
         toggle.syncState();
-
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setItemIconTintList(null);
-        navigationView.setNavigationItemSelectedListener(this);
     }
 
     @Override
@@ -74,10 +70,12 @@ public class NavigationActivity extends AppCompatActivity
             startActivity(intent);
 
         } else if (id == R.id.nav_timetable) {
-            //TODO activity containing timetable content
+            Intent intent = new Intent(context, TimetableActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_skos) {
-            //TODO activity containing SKOS content
+            Intent intent = new Intent(context, SkosActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_site) {
             Intent intent = new Intent(Intent.ACTION_VIEW);

@@ -68,6 +68,7 @@ public class OpeningHoursActivity extends NavigationActivity {
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setItemIconTintList(null);
     }
 
     private void initializer() {
