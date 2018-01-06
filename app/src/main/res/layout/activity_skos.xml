@@ -17,11 +17,17 @@
         android:fitsSystemWindows="true"
         tools:openDrawer="start">
 
-        <WebView
-            android:id="@+id/skos_view"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="?attr/actionBarSize"/>
+            android:layout_height="match_parent"
+            android:paddingTop="?attr/actionBarSize">
+
+            <WebView
+                android:id="@+id/skos_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </RelativeLayout>
 
         <include
             layout="@layout/app_bar_main"

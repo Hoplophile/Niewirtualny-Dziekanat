@@ -38,7 +38,7 @@ public class MainActivity extends NavigationActivity {
                     Intent intent = context.getPackageManager()
                             .getLaunchIntentForPackage("pl.janpogocki.agh.wirtualnydziekanat");
                     context.startActivity(intent);
-                } catch (ActivityNotFoundException e) {
+                } catch (ActivityNotFoundException|NullPointerException e) {
                     Intent intent = new Intent(Intent.ACTION_VIEW);
                     intent.setData(Uri.parse("https://dziekanat.agh.edu.pl/"));
                     startActivity(intent);

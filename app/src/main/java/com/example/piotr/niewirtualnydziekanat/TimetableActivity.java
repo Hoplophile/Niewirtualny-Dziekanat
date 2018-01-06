@@ -24,6 +24,7 @@ public class TimetableActivity extends NavigationActivity {
 
 
         final WebView timetableView = findViewById(R.id.timetable_view);
+        timetableView.getSettings().setJavaScriptEnabled(true);
         timetableView.setWebViewClient(new WebViewClient(){
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {

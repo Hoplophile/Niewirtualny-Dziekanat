@@ -22,8 +22,9 @@ public class SkosActivity extends NavigationActivity {
         setContentView(R.layout.activity_skos);
 
 
-        final WebView syllabusView = findViewById(R.id.skos_view);
-        syllabusView.setWebViewClient(new WebViewClient(){
+        final WebView skosView = findViewById(R.id.skos_view);
+        skosView.getSettings().setJavaScriptEnabled(true);
+        skosView.setWebViewClient(new WebViewClient(){
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 view.loadUrl(request.getUrl().toString());
@@ -31,7 +32,7 @@ public class SkosActivity extends NavigationActivity {
             }
         });
 
-        syllabusView.loadUrl(url);
+        skosView.loadUrl(url);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
