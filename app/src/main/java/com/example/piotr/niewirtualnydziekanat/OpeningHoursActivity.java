@@ -40,22 +40,25 @@ public class OpeningHoursActivity extends NavigationActivity {
     private OpeningHours openingHours = null;
     private SharedPreferences saved;
 
+    private final String stacjonarne = "poniedziałek: 9.00-12.00 \nwtorek: 9.00-12.00 \nśroda: 12.00-15.00 \nczwartek: dziekanat nieczynny \npiątek: 9.00-12.00";
+    private final String niestacjonarne = "poniedziałek: 9.00-12.00 (po zjazdach nieczynne) \nwtorek: 9.00-12.00 \nśroda: 12.00-15.00 \nczwartek: dziekanat nieczynny \npiątek: 9.00-12.00, 15.00-16.00 \nsoboty: 9.00-15.00 (tylko podczas zjazdów)";
+    private final String socjalna = "poniedziałek: 9.00-12.00 \nwtorek: 9.00-12.00 \nśroda: 9.00-12.00 \nczwartek: dziekanat nieczynny \npiątek: 9.00-12.00";
+    private final String doktoranckie = "poniedziałek: 9.00-11.00 \nwtorek: 9.00-11.00 \nśroda: 9.00-11.00 \nczwartek: dziekanat nieczynny \npiątek: 9.00-11.00";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_opening_hours);
         saved = this.getPreferences(Context.MODE_PRIVATE);
 
-        //Intent intent = getIntent();
         title = findViewById(R.id.title);
         title.setText("GODZINY OTWARCIA DZIEKANATU");
-        showOpeningHours("http://hmkcode.appspot.com/rest/controller/get.json");
+        //showOpeningHours("http://hmkcode.appspot.com/rest/controller/get.json"); MAYBE SOMEDAY
 
-        /*types = intent.getStringArrayExtra("Array of titles");
-        hours = intent.getStringArrayExtra("Array of hours");*/
         myList = new ArrayList<>();
         lv = findViewById(R.id.lv);
         adp = adapterMethod(myList);
+        updateManually();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -89,6 +92,17 @@ public class OpeningHoursActivity extends NavigationActivity {
     private void showOpeningHours(String address) {
         openingHours = new OpeningHours(address);
         openingHours.execute();
+    }
+
+    /**
+     * Updates the opening hours manually, without any involvement of a server,
+     * just a temporary solution until server data is available
+     */
+    private void updateManually() {
+        types = new String[] {"Studia Stacjonarne", "Studia Niestacjonarne", "Sekcja Socjalna", "Studia Doktoranckie"};
+        hours = new String[] {stacjonarne, niestacjonarne, socjalna, doktoranckie};
+        initializer();
+        lv.setAdapter(adp);
     }
 
     public String HttpGet(String urlString) {
@@ -199,12 +213,6 @@ public class OpeningHoursActivity extends NavigationActivity {
 
         @Override
         protected void onPostExecute(Boolean success) {
-            /*if (success) {
-                Intent intent = new Intent(context, OpeningHoursActivity.class);
-                intent.putExtra("Opening Hours", displayTitle);
-                intent.putExtra("Array of titles", titles);
-                intent.putExtra("Array of hours", hours);
-                startActivity(intent); }*/
             if(!success) { //if unable to connect, restores the most recently available data
                 restoreData();
                 Toast.makeText(context, "brak polaczenia z internetem", Toast.LENGTH_SHORT).show();
