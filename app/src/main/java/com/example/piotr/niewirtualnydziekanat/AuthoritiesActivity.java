@@ -17,6 +17,7 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.ScrollView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -28,12 +29,12 @@ public class AuthoritiesActivity extends NavigationActivity {
     String dean_name[] = {"Ryszard Sroka", "Andrzej Izworski", "Janusz Gajda", "Szczepan Moskwa", "Krzysztof Kluza", "Robert Stala", "Zbigniew Marszałek"};
     String auth_name[] = {"Małgorzata Tabor", "Alina Wącławska", "Małgorzata Frączek", "Angelika Burgknap-Rumian", "Małgorzata Frączek"};
     String others_name[] = {"Wioletta Serwatka", "Sara Rahman-Kula"};
-    String ext_name = "Anna Jasuba";
+    String ext_name[] = {"Anna Jasuba"};
     String dean_role[] = {"Dziekan Wydziału", "Prodziekan ds. Kształcenia - IB", "Prodziekan ds. Nauki i Współpracy", "Prodziekan ds. Studenckich i Ogólnych",
             "Prodziekan ds. Kształcenia - AiR, Informatyka", "Prodziekan ds. Kształcenia - MTM, Elektrotechnika", "Dyrektor Administracyjny Wydziału"};
     String auth_role[] = {"Automatyka i Robotyka", "Elektrotechnika", "Informatyka", "Inżynieria Biomedyczna", "Mikroelektronika w Technice i Medycynie"};
     String others_role[] = {"Sekcja socjalna", "Studia doktoranckie"};
-    String ext_role = "Automatyka i Robotyka, Elektrotechnika";
+    String ext_role[] = {"Automatyka i Robotyka, Elektrotechnika"};
     String auth_mail[] = {"mtabor@agh.edu.pl", "awaclaw@agh.edu.pl", "fraczek@agh.edu.pl", "biomed@agh.edu.pl", "fraczek@agh.edu.pl"};
     String auth_tel[] = {"126174566", "126174893", "126174892", "126172860", "126174892"};
 
@@ -45,7 +46,7 @@ public class AuthoritiesActivity extends NavigationActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_authorities);
 
-        ListView deansList = findViewById(R.id.deans_list);
+/*        ListView deansList = findViewById(R.id.deans_list);
         LinearLayout fullTimeList = findViewById(R.id.full_time_list);
         LinearLayout extramuralList = findViewById(R.id.extramural_list);
         LinearLayout othersList = findViewById(R.id.others_list);
@@ -67,7 +68,7 @@ public class AuthoritiesActivity extends NavigationActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
             }
-        });
+        });*/
 /*
         for(int i=0; i<auth_name.length; i++){
             final AuthorityItem authorityItem =
@@ -99,5 +100,27 @@ public class AuthoritiesActivity extends NavigationActivity {
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
+
+        LinearLayout deanLayout = findViewById(R.id.deans_list);
+        LinearLayout authoritiesLayout = findViewById(R.id.full_time_list);
+        LinearLayout othersLayout = findViewById(R.id.others_list);
+        LinearLayout extraLayout = findViewById(R.id.extramural_list);
+
+        setupLayout(dean_name, dean_role, deanLayout);
+        setupLayout(auth_name, auth_role, authoritiesLayout);
+        setupLayout(others_name, others_role, othersLayout);
+        setupLayout(ext_name, ext_role, extraLayout);
+    }
+
+    private void setupLayout(String[] name, String[] role, LinearLayout layout) {
+        for(int i=0; i<name.length; i++) {
+            View child = getLayoutInflater().inflate(R.layout.authorities_list_item, null);
+            TextView authorityName = child.findViewById(R.id.authority_name);
+            authorityName.setText(name[i]);
+            TextView authorityRole = child.findViewById(R.id.authority_role);
+            authorityRole.setText(role[i]);
+            layout.addView(child);
+            //TODO: add contact buttons OR on click listeners
+        }
     }
 }

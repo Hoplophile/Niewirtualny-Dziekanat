@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context="com.example.piotr.niewirtualnydziekanat.AuthoritiesActivity">
 
     <include layout="@layout/content_main" />
@@ -17,111 +16,119 @@
         android:fitsSystemWindows="true"
         tools:openDrawer="start">
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:paddingTop="?attr/actionBarSize">
 
-            <LinearLayout
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingLeft="5sp"
-                android:paddingRight="5sp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Dziekani"
-                    android:paddingStart="4sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/colorAccent"/>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginBottom="3sp"
-                    android:layout_marginTop="2sp"
-                    android:padding="-5sp"
-                    android:background="@android:color/darker_gray"/>
-
-                <ListView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/deans_list"
-                    android:divider="#FFFFFF">
-                </ListView>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Studia Stacjonarne"
-                    android:paddingStart="4sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/colorAccent"/>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginBottom="3sp"
-                    android:layout_marginTop="2sp"
-                    android:padding="-5sp"
-                    android:background="@android:color/darker_gray"/>
+                android:layout_height="wrap_content">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/full_time_list"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:padding="5sp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="4sp"
+                        android:text="Dziekani"
+                        android:textColor="@color/colorAccent"
+                        android:textStyle="bold" />
+
+                    <!--View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginBottom="3sp"
+                        android:layout_marginTop="2sp"
+                        android:padding="-5sp"
+                        android:background="@android:color/darker_gray"/>
+
+                    <ListView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/deans_list"
+                        android:divider="#FFFFFF">
+                    </ListView-->
+
+                    <LinearLayout
+                        android:id="@+id/deans_list"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="4sp"
+                        android:text="Studia Stacjonarne"
+                        android:textColor="@color/colorAccent"
+                        android:textStyle="bold" />
+
+                    <!--View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginBottom="3sp"
+                        android:layout_marginTop="2sp"
+                        android:padding="-5sp"
+                        android:background="@android:color/darker_gray"/-->
+
+                    <LinearLayout
+                        android:id="@+id/full_time_list"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="4sp"
+                        android:text="Studia Niestacjonarne"
+                        android:textColor="@color/colorAccent"
+                        android:textStyle="bold" />
+
+                    <!--View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginBottom="3sp"
+                        android:layout_marginTop="2sp"
+                        android:padding="-5sp"
+                        android:background="@android:color/darker_gray"/-->
+
+                    <LinearLayout
+                        android:id="@+id/extramural_list"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="4sp"
+                        android:text="Inne"
+                        android:textColor="@color/colorAccent"
+                        android:textStyle="bold" />
+
+                    <!--View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginBottom="3sp"
+                        android:layout_marginTop="2sp"
+                        android:padding="-5sp"
+                        android:background="@android:color/darker_gray"/-->
+
+                    <LinearLayout
+                        android:id="@+id/others_list"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"/>
+
                 </LinearLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Studia Niestacjonarne"
-                    android:paddingStart="4sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/colorAccent"/>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginBottom="3sp"
-                    android:layout_marginTop="2sp"
-                    android:padding="-5sp"
-                    android:background="@android:color/darker_gray"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/extramural_list"
-                    android:orientation="vertical">
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Inne"
-                    android:paddingStart="4sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/colorAccent"/>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginBottom="3sp"
-                    android:layout_marginTop="2sp"
-                    android:padding="-5sp"
-                    android:background="@android:color/darker_gray"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/others_list"
-                    android:orientation="vertical">
-                </LinearLayout>
-            </LinearLayout>
-        </ScrollView>
+            </ScrollView>
+        </HorizontalScrollView>
 
         <include
             layout="@layout/app_bar_main"
