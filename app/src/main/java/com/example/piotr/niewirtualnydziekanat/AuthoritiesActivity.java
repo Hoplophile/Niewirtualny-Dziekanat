@@ -1,5 +1,7 @@
 package com.example.piotr.niewirtualnydziekanat;
 
+import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -18,6 +20,7 @@ import android.widget.PopupWindow;
 import android.widget.ScrollView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -40,60 +43,20 @@ public class AuthoritiesActivity extends NavigationActivity {
 
     private List<HashMap<String, String>> mList = new ArrayList<>();
     private final Context context = AuthoritiesActivity.this;
+    private final Activity activity = this;
+    String auth_name_p, auth_role_p;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_authorities);
 
-/*        ListView deansList = findViewById(R.id.deans_list);
-        LinearLayout fullTimeList = findViewById(R.id.full_time_list);
-        LinearLayout extramuralList = findViewById(R.id.extramural_list);
-        LinearLayout othersList = findViewById(R.id.others_list);
-
-        for (int i = 0; i < dean_name.length; i++) {
-            HashMap<String, String> map = new HashMap<>();
-            map.put("Name", dean_name[i]);
-            map.put("Role", dean_role[i]);
-            mList.add(map);
-        }
-        ListAdapter adapter = new SimpleAdapter(context,
-                mList,
-                R.layout.authorities_list_item,
-                new String[] {"Name", "Role"},
-                new int[] {R.id.authority_name, R.id.authority_role});
-        deansList.setAdapter(adapter);
-        deansList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-            }
-        });*/
-/*
-        for(int i=0; i<auth_name.length; i++){
-            final AuthorityItem authorityItem =
-                    new AuthorityItem(context,auth_name[i],auth_role[i]);
-            authorityItem.setId(i);
-            fullTimeList.addView(authorityItem);
-        }
-        final AuthorityItem authorityItem =
-                new AuthorityItem(context,ext_name,ext_role);
-        extramuralList.addView(authorityItem);
-
-        final AuthorityItem authorityItem1 =
-                new AuthorityItem(context,others_name[0],others_role[0]);
-        othersList.addView(authorityItem1);
-
-        final AuthorityItem authorityItem2 =
-                new AuthorityItem(context,others_name[1],others_role[1]);
-        othersList.addView(authorityItem2);
-*/
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                activity, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -114,13 +77,21 @@ public class AuthoritiesActivity extends NavigationActivity {
 
     private void setupLayout(String[] name, String[] role, LinearLayout layout) {
         for(int i=0; i<name.length; i++) {
+            auth_name_p = name[i];
+            auth_role_p = role[i];
             View child = getLayoutInflater().inflate(R.layout.authorities_list_item, null);
             TextView authorityName = child.findViewById(R.id.authority_name);
             authorityName.setText(name[i]);
             TextView authorityRole = child.findViewById(R.id.authority_role);
             authorityRole.setText(role[i]);
             layout.addView(child);
-            //TODO: add contact buttons OR on click listeners
+            child.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    AuthorityPopup authorityPopup = new AuthorityPopup();
+                    authorityPopup.showDialog(activity, auth_name_p, auth_role_p, "222", "kbkfes");
+                }
+            });
         }
     }
 }

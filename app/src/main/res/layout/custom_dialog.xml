@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300sp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/auth_name"
+        android:layout_gravity="center"
+        android:textSize="25sp"
+        android:textColor="@color/colorAccent"
+        android:text="dr hab. inż. Ryszard Sroka"
+        android:textAlignment="center"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/auth_role"
+        android:layout_gravity="center"
+        android:textSize="15sp"
+        android:textColor="@android:color/darker_gray"
+        android:text="Dziekan Wydziału"
+        android:textAlignment="center"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/auth_photo"
+        android:layout_margin="5sp"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <Button
+            android:layout_width="40sp"
+            android:layout_height="40sp"
+            android:id="@+id/auth_phone"
+            android:background="@drawable/call_ic"
+            android:layout_margin="15sp"/>
+
+        <Button
+            android:layout_width="40sp"
+            android:layout_height="40sp"
+            android:id="@+id/auth_mail"
+            android:background="@drawable/email_ic"
+            android:layout_margin="15sp"/>
+
+    </LinearLayout>
+
+</LinearLayout>

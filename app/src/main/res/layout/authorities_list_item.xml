@@ -6,7 +6,7 @@
     android:padding="6sp">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Małgorzata Frączek"
         android:id="@+id/authority_name"
@@ -16,7 +16,7 @@
         android:layout_alignParentStart="true"/>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Mikroelektronika w Technice i Medycynie"
         android:textSize="16sp"

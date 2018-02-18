@@ -16,8 +16,8 @@
         android:fitsSystemWindows="true"
         tools:openDrawer="start">
 
-        <HorizontalScrollView
-            android:layout_width="wrap_content"
+        <ScrollView
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingTop="?attr/actionBarSize">
 
@@ -39,20 +39,13 @@
                         android:textColor="@color/colorAccent"
                         android:textStyle="bold" />
 
-                    <!--View
+                    <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginBottom="3sp"
                         android:layout_marginTop="2sp"
                         android:padding="-5sp"
                         android:background="@android:color/darker_gray"/>
-
-                    <ListView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/deans_list"
-                        android:divider="#FFFFFF">
-                    </ListView-->
 
                     <LinearLayout
                         android:id="@+id/deans_list"
@@ -68,13 +61,13 @@
                         android:textColor="@color/colorAccent"
                         android:textStyle="bold" />
 
-                    <!--View
+                    <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginBottom="3sp"
                         android:layout_marginTop="2sp"
                         android:padding="-5sp"
-                        android:background="@android:color/darker_gray"/-->
+                        android:background="@android:color/darker_gray"/>
 
                     <LinearLayout
                         android:id="@+id/full_time_list"
@@ -90,13 +83,13 @@
                         android:textColor="@color/colorAccent"
                         android:textStyle="bold" />
 
-                    <!--View
+                    <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginBottom="3sp"
                         android:layout_marginTop="2sp"
                         android:padding="-5sp"
-                        android:background="@android:color/darker_gray"/-->
+                        android:background="@android:color/darker_gray"/>
 
                     <LinearLayout
                         android:id="@+id/extramural_list"
@@ -112,13 +105,13 @@
                         android:textColor="@color/colorAccent"
                         android:textStyle="bold" />
 
-                    <!--View
+                    <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginBottom="3sp"
                         android:layout_marginTop="2sp"
                         android:padding="-5sp"
-                        android:background="@android:color/darker_gray"/-->
+                        android:background="@android:color/darker_gray"/>
 
                     <LinearLayout
                         android:id="@+id/others_list"
@@ -128,7 +121,7 @@
 
                 </LinearLayout>
             </ScrollView>
-        </HorizontalScrollView>
+        </ScrollView>
 
         <include
             layout="@layout/app_bar_main"
