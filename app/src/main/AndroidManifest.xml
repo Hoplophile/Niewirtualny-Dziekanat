@@ -19,38 +19,40 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
+
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
         <activity
             android:name=".DeaneryActivity"
             android:label="Dziekanat"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".LoginActivity"
             android:label="Logowanie"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".OpeningHoursActivity"
-            android:theme="@style/AppTheme.NoActionBar"
             android:label="Godziny otwarcia"
-            android:windowSoftInputMode="adjustPan"/>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".AuthoritiesActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:label="Władze wydziału"/>
+            android:label="Władze wydziału"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".SyllabusActivity"
             android:label="Syllabus"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".TimetableActivity"
             android:label="Plany Zajęć"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".SkosActivity"
             android:label="SKOS"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
+
 </manifest>

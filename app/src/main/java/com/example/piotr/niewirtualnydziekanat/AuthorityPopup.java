@@ -71,8 +71,7 @@ public class AuthorityPopup {
         callButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Uri call = Uri.parse("tel:" + phone);
-                Intent intent = new Intent(Intent.ACTION_DIAL, call);
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phone));
                 context.startActivity(intent);
             }
         });
@@ -81,8 +80,7 @@ public class AuthorityPopup {
         mailButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_SENDTO);
-                intent.setData(Uri.parse("mailto:"+mail));
+                Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:"+mail));
                 intent.putExtra(android.content.Intent.EXTRA_EMAIL, mail);
                 context.startActivity(Intent.createChooser(intent, "Send via email"));
             }
