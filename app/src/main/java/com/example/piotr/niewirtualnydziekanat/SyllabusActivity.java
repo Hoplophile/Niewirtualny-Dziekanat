@@ -20,6 +20,7 @@ public class SyllabusActivity extends NavigationActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_syllabus);
 
+        progressBar = findViewById(R.id.loading_progress);
 
         final WebView syllabusView = findViewById(R.id.syllabus_view);
         syllabusView.getSettings().setJavaScriptEnabled(true);                                      //TODO: enable JS
