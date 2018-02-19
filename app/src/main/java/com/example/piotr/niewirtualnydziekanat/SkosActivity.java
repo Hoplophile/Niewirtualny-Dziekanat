@@ -35,6 +35,7 @@ public class SkosActivity extends NavigationActivity {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 view.loadUrl(request.getUrl().toString());
+                progressBar.setVisibility(View.VISIBLE);
                 return false;
             }
             @Override
