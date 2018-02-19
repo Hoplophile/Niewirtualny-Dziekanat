@@ -1,5 +1,6 @@
 package com.example.piotr.niewirtualnydziekanat;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -81,6 +82,16 @@ public class NavigationActivity extends AppCompatActivity
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setData(Uri.parse("https://www.eaiib.agh.edu.pl/"));
             startActivity(intent);
+        } else if (id == R.id.nav_wu) {
+            try{
+                Intent intent = context.getPackageManager()
+                        .getLaunchIntentForPackage("pl.janpogocki.agh.wirtualnydziekanat");
+                context.startActivity(intent);
+            } catch (ActivityNotFoundException |NullPointerException e) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("https://dziekanat.agh.edu.pl/"));
+                startActivity(intent);
+            }
 
         } else if (id == R.id.nav_about) {
             //TODO activity with info about authors and app

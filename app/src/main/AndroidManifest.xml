@@ -46,7 +46,7 @@
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".TimetableActivity"
-            android:label="Plan Zajęć"
+            android:label="Plany Zajęć"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".SkosActivity"

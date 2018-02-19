@@ -5,6 +5,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -12,6 +13,7 @@ import android.webkit.WebViewClient;
 public class SyllabusActivity extends NavigationActivity {
 
     private final String url="https://syllabuskrk.agh.edu.pl/2016-2017/pl/treasuries/academy_units/16/study_plans";
+    private View progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,10 +22,14 @@ public class SyllabusActivity extends NavigationActivity {
 
 
         final WebView syllabusView = findViewById(R.id.syllabus_view);
-        syllabusView.getSettings().setJavaScriptEnabled(true);
+        syllabusView.getSettings().setJavaScriptEnabled(true);                                      //TODO: enable JS
+        syllabusView.clearCache(true);
+        syllabusView.clearHistory();
+        syllabusView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
         syllabusView.setWebViewClient(new WebViewClient(){
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                progressBar.setVisibility(View.VISIBLE);
                 view.loadUrl(request.getUrl().toString());
                 return false;
             }
@@ -32,6 +38,7 @@ public class SyllabusActivity extends NavigationActivity {
                 //webview.loadUrl("javascript:(function() { document.getElementsByTagName" +
                 //        "('main-content')[0].style.display=\"none\"; })()");
                 //TODO DELETE FEEDBACK ICON
+                progressBar.setVisibility(View.GONE);
             }
         });
 

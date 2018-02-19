@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
+    <group android:checkableBehavior="none"
+        android:id="@+id/top">
         <item
             android:id="@+id/nav_start"
             android:icon="@drawable/home_ic"
@@ -32,13 +33,21 @@
             android:id="@+id/nav_skos"
             android:icon="@drawable/skos_ic"
             android:title="SKOS" />
+    </group>
+
+    <group android:checkableBehavior="none"
+        android:id="@+id/bottom">
         <item
             android:id="@+id/nav_site"
-            android:icon="@drawable/link_ic"
+            android:icon="@drawable/eaiiib_ic"
             android:title="Strona wydziału" />
+        <item
+            android:id="@+id/nav_wu"
+            android:icon="@drawable/wu_ic"
+            android:title="Wirtualny Dziekanat" />
         <item
             android:id="@+id/nav_about"
             android:icon="@drawable/st_logo"
-            android:title="O aplikacji" />
+            android:title="Silicon Technologies" />
     </group>
 </menu>

@@ -18,7 +18,7 @@
         <ScrollView
             android:id="@+id/button_list"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:id="@+id/buttons"
@@ -46,7 +46,8 @@
                     android:background="@color/colorPrimary"
                     android:text="@string/login_button"
                     android:textColor="@color/colorAccent"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:elevation="10sp" />
 
                 <Button
                     android:id="@+id/virtual_deanery"
@@ -58,7 +59,8 @@
                     android:background="@color/colorPrimary"
                     android:text="@string/wd_button"
                     android:textColor="@color/colorAccent"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:elevation="10sp" />
 
                 <Button
                     android:id="@+id/opening_hours"
@@ -70,7 +72,8 @@
                     android:background="@color/colorPrimary"
                     android:text="@string/hours_button"
                     android:textColor="@color/colorAccent"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:elevation="10sp" />
 
                 <Button
                     android:id="@+id/staff"
@@ -82,7 +85,9 @@
                     android:background="@color/colorPrimary"
                     android:text="@string/staff_button"
                     android:textColor="@color/colorAccent"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:elevation="10sp"
+                    android:layout_marginBottom="5sp"/>
 
             </LinearLayout>
 
