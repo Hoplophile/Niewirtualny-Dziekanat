@@ -17,8 +17,11 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+
+import java.util.ArrayList;
 
 /**
  * A styled map using JSON styles from a raw resource.
@@ -51,6 +54,7 @@ public class MapActivity extends AppCompatActivity
         mPlaceDetectionClient = Places.getPlaceDetectionClient(this, null);
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         */
+
     }
 
     /**
@@ -78,6 +82,8 @@ public class MapActivity extends AppCompatActivity
         getDeviceLocation();
         updateLocationUI();
         map = googleMap;
+
+        map.addMarker(new MarkerOptions().position(new LatLng(50.064546, 19.923313)).title("A0"));
     }
 
     private void getLocationPermission() {
