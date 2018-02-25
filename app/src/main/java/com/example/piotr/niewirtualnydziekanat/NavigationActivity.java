@@ -3,6 +3,8 @@ package com.example.piotr.niewirtualnydziekanat;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -77,7 +79,7 @@ public class NavigationActivity extends AppCompatActivity
         } else if (id == R.id.nav_skos) {
             Intent intent = new Intent(context, SkosActivity.class);
             startActivity(intent);
-
+                                                                                                    //TODO activity with AGH map
         } else if (id == R.id.nav_site) {
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setData(Uri.parse("https://www.eaiib.agh.edu.pl/"));
@@ -93,13 +95,19 @@ public class NavigationActivity extends AppCompatActivity
                 startActivity(intent);
             }
 
-        } else if (id == R.id.nav_about) {
-            //TODO activity with info about authors and app
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setData(Uri.parse("https://www.facebook.com/agh.si.tech/"));
+        } else if (id == R.id.nav_si_tech) {
+            Uri uri;
+            try {
+                ApplicationInfo applicationInfo =
+                        getPackageManager().getApplicationInfo("com.facebook.katana", 0);
+                uri = Uri.parse("fb://facewebmodal/f?href=https://www.facebook.com/agh.si.tech");
+            } catch (PackageManager.NameNotFoundException e) {
+                uri = Uri.parse("https://www.facebook.com/agh.si.tech");
+            }
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             startActivity(intent);
         }
-
+                                                                                                    //TODO activity with info about authors and app
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

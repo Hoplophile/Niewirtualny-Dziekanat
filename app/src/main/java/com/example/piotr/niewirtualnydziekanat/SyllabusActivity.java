@@ -13,7 +13,7 @@ import android.webkit.WebViewClient;
 public class SyllabusActivity extends NavigationActivity {
 
     private final String url="https://syllabuskrk.agh.edu.pl/2016-2017/pl/treasuries/academy_units/16/study_plans";
-    private View progressBar;
+    private View progressBar, progressBarBackground;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +21,7 @@ public class SyllabusActivity extends NavigationActivity {
         setContentView(R.layout.activity_syllabus);
 
         progressBar = findViewById(R.id.loading_progress);
+        progressBarBackground = findViewById(R.id.progressbar_background);
 
         final WebView syllabusView = findViewById(R.id.syllabus_view);
         syllabusView.getSettings().setJavaScriptEnabled(true);                                      //TODO: enable JS
@@ -31,6 +32,7 @@ public class SyllabusActivity extends NavigationActivity {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 progressBar.setVisibility(View.VISIBLE);
+                progressBarBackground.setVisibility(View.VISIBLE);
                 view.loadUrl(request.getUrl().toString());
                 return false;
             }
@@ -40,6 +42,7 @@ public class SyllabusActivity extends NavigationActivity {
                 //        "('main-content')[0].style.display=\"none\"; })()");
                 //TODO DELETE FEEDBACK ICON
                 progressBar.setVisibility(View.GONE);
+                progressBarBackground.setVisibility(View.GONE);
             }
         });
 

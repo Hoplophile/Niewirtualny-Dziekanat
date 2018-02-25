@@ -17,7 +17,7 @@ import android.webkit.WebViewClient;
 public class TimetableActivity extends NavigationActivity {
 
     private final String url="http://planzajec.eaiib.agh.edu.pl";
-    private View progressBar;
+    private View progressBar, progressBarBackground;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +25,7 @@ public class TimetableActivity extends NavigationActivity {
         setContentView(R.layout.activity_timetable);
 
         progressBar = findViewById(R.id.loading_progress);
+        progressBarBackground = findViewById(R.id.progressbar_background);
 
         final WebView timetableView = findViewById(R.id.timetable_view);                            //TODO: enable JS
         timetableView.clearCache(true);
@@ -35,11 +36,14 @@ public class TimetableActivity extends NavigationActivity {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 view.loadUrl(request.getUrl().toString());
+                progressBar.setVisibility(View.VISIBLE);
+                progressBarBackground.setVisibility(View.VISIBLE);
                 return false;
             }
             @Override
             public void onPageFinished(WebView webview, String url){
                 progressBar.setVisibility(View.GONE);
+                progressBarBackground.setVisibility(View.GONE);
             }
         });
 

@@ -17,7 +17,7 @@ import android.webkit.WebViewClient;
 public class SkosActivity extends NavigationActivity {
 
     private final String url="https://skos.agh.edu.pl/";
-    private View progressBar;
+    private View progressBar, progressBarBackground;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,9 +25,13 @@ public class SkosActivity extends NavigationActivity {
         setContentView(R.layout.activity_skos);
 
         progressBar = findViewById(R.id.loading_progress);
+        progressBarBackground = findViewById(R.id.progressbar_background);
 
         final WebView skosView = findViewById(R.id.skos_view);
         skosView.getSettings().setJavaScriptEnabled(true);                                          //TODO: enable JS
+        skosView.getSettings().setDomStorageEnabled(true);
+        skosView.getSettings().setAppCacheEnabled(true);
+        skosView.getSettings().setDatabaseEnabled(true);
         skosView.clearCache(true);
         skosView.clearHistory();
         skosView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
@@ -36,11 +40,13 @@ public class SkosActivity extends NavigationActivity {
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 view.loadUrl(request.getUrl().toString());
                 progressBar.setVisibility(View.VISIBLE);
+                progressBarBackground.setVisibility(View.VISIBLE);
                 return false;
             }
             @Override
             public void onPageFinished(WebView webview, String url){
                 progressBar.setVisibility(View.GONE);
+                progressBarBackground.setVisibility(View.GONE);
             }
         });
 
