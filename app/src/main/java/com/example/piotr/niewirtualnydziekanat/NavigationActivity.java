@@ -18,7 +18,6 @@ import android.view.MenuItem;
 public class NavigationActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
-
     Context context = NavigationActivity.this;
 
     @Override
@@ -79,11 +78,16 @@ public class NavigationActivity extends AppCompatActivity
         } else if (id == R.id.nav_skos) {
             Intent intent = new Intent(context, SkosActivity.class);
             startActivity(intent);
-                                                                                                    //TODO activity with AGH map
+
+        } else if (id == R.id.nav_map) {
+            Intent intent = new Intent(context, MapActivity.class);
+            startActivity(intent);
+
         } else if (id == R.id.nav_site) {
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setData(Uri.parse("https://www.eaiib.agh.edu.pl/"));
             startActivity(intent);
+
         } else if (id == R.id.nav_wu) {
             try{
                 Intent intent = context.getPackageManager()

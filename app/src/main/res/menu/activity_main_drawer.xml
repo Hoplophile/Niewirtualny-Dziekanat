@@ -33,6 +33,9 @@
             android:id="@+id/nav_skos"
             android:icon="@drawable/skos_ic"
             android:title="SKOS" />
+        <item
+            android:id="@+id/nav_map"
+            android:title="Mapa Kampusu" />
     </group>
 
     <group android:checkableBehavior="none"

@@ -37,7 +37,7 @@ public class SkosActivity extends NavigationActivity {
         skosView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
         skosView.setWebViewClient(new WebViewClient(){
             @Override
-            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {     //TODO: handle page loading timeout
                 view.loadUrl(request.getUrl().toString());
                 progressBar.setVisibility(View.VISIBLE);
                 progressBarBackground.setVisibility(View.VISIBLE);
