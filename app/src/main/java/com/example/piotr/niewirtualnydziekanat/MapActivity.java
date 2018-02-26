@@ -42,6 +42,8 @@ import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.concurrent.TimeUnit;
 
+import static java.lang.Boolean.TRUE;
+
 public class MapActivity extends NavigationActivity
         implements OnMapReadyCallback {
 
@@ -52,7 +54,7 @@ public class MapActivity extends NavigationActivity
     private static final LatLng DEFAULT_LOCATION = new LatLng(50.06666, 19.914048);
     private static Location lastKnownLocation;
     private FusedLocationProviderClient fusedLocationProviderClient;
-    GoogleMap map;
+    GoogleMap map = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,8 +70,6 @@ public class MapActivity extends NavigationActivity
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        getLocationPermission();
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -105,6 +105,8 @@ public class MapActivity extends NavigationActivity
         map = googleMap;
         map.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 
+        getLocationPermission();
+
         IconGenerator iconGenerator = new IconGenerator(this);                              //TODO: add buildings markers
         MarkerOptions markerOptions = new MarkerOptions()
                 .icon(BitmapDescriptorFactory.fromBitmap(iconGenerator.makeIcon("A-0")))
@@ -121,6 +123,7 @@ public class MapActivity extends NavigationActivity
         if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
                 android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             mLocationPermissionGranted = true;
+            map.setMyLocationEnabled(TRUE);
         } else {
             ActivityCompat.requestPermissions(this,
                     new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
@@ -170,108 +173,7 @@ public class MapActivity extends NavigationActivity
                 final Task locationResult = fusedLocationProviderClient.getLastLocation();
                 locationResult.addOnCompleteListener(this, new OnCompleteListener() {
                     @Override
-                    public void onComplete(@NonNull Task task) {
-                        if (task.isSuccessful()) {
-                            lastKnownLocation = LocationServices.FusedLocationApi.getLastLocation(new GoogleApiClient() {
-                                @Override
-                                public boolean hasConnectedApi(@NonNull Api<?> api) {
-                                    return false;
-                                }
-
-                                @NonNull
-                                @Override
-                                public ConnectionResult getConnectionResult(@NonNull Api<?> api) {
-                                    return null;
-                                }
-
-                                @Override
-                                public void connect() {
-
-                                }
-
-                                @Override
-                                public ConnectionResult blockingConnect() {
-                                    return null;
-                                }
-
-                                @Override
-                                public ConnectionResult blockingConnect(long l, @NonNull TimeUnit timeUnit) {
-                                    return null;
-                                }
-
-                                @Override
-                                public void disconnect() {
-
-                                }
-
-                                @Override
-                                public void reconnect() {
-
-                                }
-
-                                @Override
-                                public PendingResult<Status> clearDefaultAccountAndReconnect() {
-                                    return null;
-                                }
-
-                                @Override
-                                public void stopAutoManage(@NonNull FragmentActivity fragmentActivity) {
-
-                                }
-
-                                @Override
-                                public boolean isConnected() {
-                                    return false;
-                                }
-
-                                @Override
-                                public boolean isConnecting() {
-                                    return false;
-                                }
-
-                                @Override
-                                public void registerConnectionCallbacks(@NonNull ConnectionCallbacks connectionCallbacks) {
-
-                                }
-
-                                @Override
-                                public boolean isConnectionCallbacksRegistered(@NonNull ConnectionCallbacks connectionCallbacks) {
-                                    return false;
-                                }
-
-                                @Override
-                                public void unregisterConnectionCallbacks(@NonNull ConnectionCallbacks connectionCallbacks) {
-
-                                }
-
-                                @Override
-                                public void registerConnectionFailedListener(@NonNull OnConnectionFailedListener onConnectionFailedListener) {
-
-                                }
-
-                                @Override
-                                public boolean isConnectionFailedListenerRegistered(@NonNull OnConnectionFailedListener onConnectionFailedListener) {
-                                    return false;
-                                }
-
-                                @Override
-                                public void unregisterConnectionFailedListener(@NonNull OnConnectionFailedListener onConnectionFailedListener) {
-
-                                }
-
-                                @Override
-                                public void dump(String s, FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strings) {
-
-                                }
-                            });
-                            map.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                                    new LatLng(lastKnownLocation.getLatitude(),
-                                            lastKnownLocation.getLongitude()), DEFAULT_ZOOM));
-                        } else {
-                            map.moveCamera(CameraUpdateFactory.newLatLngZoom(DEFAULT_LOCATION, DEFAULT_ZOOM));
-                            map.getUiSettings().setMyLocationButtonEnabled(false);
-                        }
-                    }
+                    public void onComplete(@NonNull Task task) { }
                 });
             }
         } catch(SecurityException e) {}
