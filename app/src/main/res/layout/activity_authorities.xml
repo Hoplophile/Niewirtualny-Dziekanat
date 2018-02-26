@@ -22,10 +22,6 @@
             android:layout_height="match_parent"
             android:paddingTop="?attr/actionBarSize">
 
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="5sp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -46,8 +42,9 @@
                         android:layout_marginTop="2sp"
                         android:layout_marginRight="-5sp"
                         android:layout_marginLeft="-5sp"
+                        android:padding="-10sp"
                         android:background="@color/colorAccent"
-                        android:elevation="2sp"/>
+                        android:elevation="2dp"/>
 
                     <LinearLayout
                         android:id="@+id/deans_list"
@@ -72,7 +69,7 @@
                         android:layout_marginLeft="-5sp"
                         android:padding="-10sp"
                         android:background="@color/colorAccent"
-                        android:elevation="2sp"/>
+                        android:elevation="2dp"/>
 
                     <LinearLayout
                         android:id="@+id/full_time_list"
@@ -95,9 +92,9 @@
                         android:layout_marginTop="2sp"
                         android:layout_marginRight="-5sp"
                         android:layout_marginLeft="-5sp"
-                        android:padding="-5sp"
+                        android:padding="-10sp"
                         android:background="@color/colorAccent"
-                        android:elevation="2sp"/>
+                        android:elevation="2dp"/>
 
                     <LinearLayout
                         android:id="@+id/extramural_list"
@@ -118,9 +115,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginTop="2sp"
-                        android:padding="-5sp"
+                        android:layout_marginRight="-5sp"
+                        android:layout_marginLeft="-5sp"
+                        android:padding="-10sp"
                         android:background="@color/colorAccent"
-                        android:elevation="2sp"/>
+                        android:elevation="2dp"/>
 
                     <LinearLayout
                         android:id="@+id/others_list"
@@ -130,7 +129,6 @@
                         android:padding="5sp"/>
 
                 </LinearLayout>
-            </ScrollView>
         </ScrollView>
 
         <include

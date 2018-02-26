@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="none"
@@ -16,7 +17,7 @@
         <item
             android:id="@+id/nav_authorities"
             android:icon="@drawable/authorities_ic"
-            android:title="Władze wydziału" />
+            android:title="Kontakt" />
         <item
             android:id="@+id/nav_opening_hours"
             android:icon="@drawable/opening_hours_ic"
@@ -35,6 +36,7 @@
             android:title="SKOS" />
         <item
             android:id="@+id/nav_map"
+            android:icon="@drawable/map_ic"
             android:title="Mapa Kampusu" />
     </group>
 
