@@ -44,17 +44,20 @@ import java.util.concurrent.TimeUnit;
 
 import static java.lang.Boolean.TRUE;
 
-public class MapActivity extends NavigationActivity
-        implements OnMapReadyCallback {
+public class MapActivity extends NavigationActivity implements OnMapReadyCallback {
 
-    private static final String TAG = MapActivity.class.getSimpleName();
     private boolean mLocationPermissionGranted;
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
-    private static final int DEFAULT_ZOOM = 15;
     private static final LatLng DEFAULT_LOCATION = new LatLng(50.06666, 19.914048);
-    private static Location lastKnownLocation;
-    private FusedLocationProviderClient fusedLocationProviderClient;
-    GoogleMap map = null;
+    private GoogleMap map;
+
+    String titles[] = {"A0", "A1", "H-A1", "A2", "H-A2", "A3", "A4", "C1", "C2", "C3", "C4", "U1", "U2"};
+    String snippets[] = {"Gmach Główny", "", "", "", "", "", "", "", "", "", "", "Biblioteka", "Centrum Dydaktyki"};
+    Double lat[] = {50.064546, 50.064855, 50.064391, 50.064970, 50.064498, 50.065111, 50.065188,
+            50.065568, 50.065960, 50.066122, 50.065964, 50.065686, 50.064600};
+    Double lng[] = {19.923313, 19.922477, 19.922278, 19.921768, 19.921553, 19.920699, 19.919946,
+            19.922773, 19.922479, 19.921674, 19.920283, 19.921505, 19.920527};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +68,6 @@ public class MapActivity extends NavigationActivity
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                         .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -99,7 +100,6 @@ public class MapActivity extends NavigationActivity
 
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(DEFAULT_LOCATION));
 
-        getDeviceLocation();
         updateLocationUI();
 
         map = googleMap;
@@ -107,11 +107,14 @@ public class MapActivity extends NavigationActivity
 
         getLocationPermission();
 
-        IconGenerator iconGenerator = new IconGenerator(this);                              //TODO: add buildings markers
-        MarkerOptions markerOptions = new MarkerOptions()
-                .icon(BitmapDescriptorFactory.fromBitmap(iconGenerator.makeIcon("A-0")))
-                .position(new LatLng(50.064546, 19.923313));
-        map.addMarker(markerOptions);
+        for(int i=0; i<titles.length; i++) {
+            IconGenerator iconGenerator = new IconGenerator(this);                          //TODO: button enabling/disabling icons
+            MarkerOptions markerOptions = new MarkerOptions()
+                    .icon(BitmapDescriptorFactory.fromBitmap(iconGenerator.makeIcon(titles[i])))
+                    .position(new LatLng(lat[i], lng[i]))
+                    .snippet(snippets[i]);
+            map.addMarker(markerOptions);
+        }
     }
 
     private void getLocationPermission() {
@@ -157,26 +160,9 @@ public class MapActivity extends NavigationActivity
             } else {
                 map.setMyLocationEnabled(false);
                 map.getUiSettings().setMyLocationButtonEnabled(false);
-                lastKnownLocation = null;
                 getLocationPermission();
             }
         } catch (SecurityException e)  {}
-    }
-
-    private void getDeviceLocation() {
-    /*
-     * Get the best and most recent location of the device, which may be null in rare
-     * cases when a location is not available.
-     */
-        try {
-            if (mLocationPermissionGranted) {
-                final Task locationResult = fusedLocationProviderClient.getLastLocation();
-                locationResult.addOnCompleteListener(this, new OnCompleteListener() {
-                    @Override
-                    public void onComplete(@NonNull Task task) { }
-                });
-            }
-        } catch(SecurityException e) {}
     }
 }
 

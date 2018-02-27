@@ -27,15 +27,6 @@ public class MainActivity extends NavigationActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button loginButton = findViewById(R.id.login);
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, LoginActivity.class);
-                startActivity(intent);
-            }
-        });
-
         Button deaneryWebsiteButton = findViewById(R.id.virtual_deanery);
         deaneryWebsiteButton.setOnClickListener(new View.OnClickListener() {
             @Override

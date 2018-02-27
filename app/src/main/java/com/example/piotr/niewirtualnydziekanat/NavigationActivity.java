@@ -63,10 +63,6 @@ public class NavigationActivity extends AppCompatActivity
             Intent intent = new Intent(context, OpeningHoursActivity.class);
             startActivity(intent);
 
-        } else if (id == R.id.nav_deanery) {
-            Intent intent = new Intent(context, LoginActivity.class);
-            startActivity(intent);
-
         } else if (id == R.id.nav_syllabus) {
             Intent intent = new Intent(context, SyllabusActivity.class);
             startActivity(intent);

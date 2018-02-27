@@ -11,10 +11,6 @@
             android:icon="@drawable/home_ic"
             android:title="Start" />
         <item
-            android:id="@+id/nav_deanery"
-            android:icon="@drawable/login_ic"
-            android:title="Logowanie" />
-        <item
             android:id="@+id/nav_authorities"
             android:icon="@drawable/authorities_ic"
             android:title="Kontakt" />
