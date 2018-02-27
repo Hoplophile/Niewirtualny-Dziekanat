@@ -30,7 +30,6 @@ import java.util.List;
 
 public class OpeningHoursActivity extends NavigationActivity {
 
-    private TextView title;
     private String[] types;
     private String[] hours;
     private ListView lv;
@@ -51,8 +50,6 @@ public class OpeningHoursActivity extends NavigationActivity {
         setContentView(R.layout.activity_opening_hours);
         saved = this.getPreferences(Context.MODE_PRIVATE);
 
-        title = findViewById(R.id.title);
-        title.setText("GODZINY OTWARCIA DZIEKANATU");
         //showOpeningHours("http://hmkcode.appspot.com/rest/controller/get.json"); MAYBE SOMEDAY
 
         myList = new ArrayList<>();
