@@ -26,6 +26,7 @@ public class TimetableActivity extends NavigationActivity {
         timetableView.clearCache(true);
         timetableView.clearHistory();
         timetableView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+        timetableView.getSettings().setJavaScriptEnabled(true);
         timetableView.setWebViewClient(new WebViewClient(){
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {

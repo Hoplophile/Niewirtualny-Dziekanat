@@ -22,7 +22,8 @@ public class SyllabusActivity extends NavigationActivity {
         progressBar = findViewById(R.id.loading_progress);
         progressBarBackground = findViewById(R.id.progressbar_background);
 
-        final WebView syllabusView = findViewById(R.id.syllabus_view);                                    //TODO: enable JS
+        final WebView syllabusView = findViewById(R.id.syllabus_view);
+        syllabusView.getSettings().setJavaScriptEnabled(true);                                      //TODO: enable JS
         syllabusView.clearCache(true);
         syllabusView.clearHistory();
         syllabusView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
