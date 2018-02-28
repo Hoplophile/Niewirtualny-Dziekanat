@@ -39,7 +39,6 @@ public class SyllabusActivity extends NavigationActivity {
             public void onPageFinished(WebView webview, String url){
                 //webview.loadUrl("javascript:(function() { document.getElementsByTagName" +
                 //        "('main-content')[0].style.display=\"none\"; })()");
-                //TODO DELETE FEEDBACK ICON
                 progressBar.setVisibility(View.GONE);
                 progressBarBackground.setVisibility(View.GONE);
             }
