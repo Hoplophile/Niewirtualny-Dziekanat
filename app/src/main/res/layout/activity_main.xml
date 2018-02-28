@@ -75,6 +75,19 @@
                     android:text="@string/staff_button"
                     android:textColor="@color/colorAccent"
                     android:textStyle="bold"
+                    android:elevation="10sp" />
+
+                <Button
+                    android:id="@+id/news"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_marginTop="10sp"
+                    android:background="@color/colorPrimary"
+                    android:text="@string/news"
+                    android:textColor="@color/colorAccent"
+                    android:textStyle="bold"
                     android:elevation="10sp"
                     android:layout_marginBottom="5sp"/>
 

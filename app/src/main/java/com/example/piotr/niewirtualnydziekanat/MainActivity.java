@@ -61,6 +61,15 @@ public class MainActivity extends NavigationActivity {
             }
         });
 
+        Button newsButton = findViewById(R.id.news);
+        newsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, NewsActivity.class);
+                startActivity(intent);
+            }
+        });
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

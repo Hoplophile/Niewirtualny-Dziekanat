@@ -60,6 +60,10 @@
             android:name=".MapActivity"
             android:label="Mapa Kampusu"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".NewsActivity"
+            android:label="Aktualności"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
