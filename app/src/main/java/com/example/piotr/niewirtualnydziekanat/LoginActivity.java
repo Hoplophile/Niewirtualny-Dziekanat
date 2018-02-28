@@ -39,8 +39,10 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * A login screen that offers login via email/password.
+ * Since school project failed, this class is never used, but
+ * hopefully we will reactivate it in the future.
  */
+
 public class LoginActivity extends NavigationActivity {
 
     /**

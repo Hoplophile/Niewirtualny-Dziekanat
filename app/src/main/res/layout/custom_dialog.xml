@@ -11,9 +11,17 @@
         android:id="@+id/auth_name"
         android:layout_gravity="center"
         android:textSize="25sp"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/black"
         android:text="dr hab. inż. Ryszard Sroka"
         android:textAlignment="center"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="2sp"
+        android:layout_marginRight="20sp"
+        android:layout_marginLeft="20sp"
+        android:background="@color/colorAccent"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -31,7 +39,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:id="@+id/auth_photo"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        android:elevation="2sp"/>
 
     <LinearLayout
         android:layout_width="wrap_content"

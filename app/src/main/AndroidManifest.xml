@@ -10,7 +10,7 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="EAIiIB"
+        android:label="Aplikacja WEAIiIB"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -19,7 +19,7 @@
             android:value="AIzaSyAyQW-wguLXBk0n-nDQOw_jvkgykFwvsKQ"/>
         <activity
             android:name=".MainActivity"
-            android:label="Strona Główna"
+            android:label="Aplikacja WEAIiIB"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />

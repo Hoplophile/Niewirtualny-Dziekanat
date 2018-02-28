@@ -29,9 +29,10 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingStart="4sp"
+                        android:textAlignment="center"
                         android:text="Dziekani, prodziekani"
                         android:textColor="@color/colorAccent"
                         android:textStyle="bold" />
@@ -54,8 +55,9 @@
                         android:padding="5sp"/>
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textAlignment="center"
                         android:paddingStart="4sp"
                         android:text="Studia Stacjonarne"
                         android:textColor="@color/colorAccent"
@@ -79,8 +81,9 @@
                         android:padding="5sp"/>
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textAlignment="center"
                         android:paddingStart="4sp"
                         android:text="Studia Niestacjonarne"
                         android:textColor="@color/colorAccent"
@@ -104,8 +107,9 @@
                         android:padding="5sp"/>
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textAlignment="center"
                         android:paddingStart="4sp"
                         android:text="Inne"
                         android:textColor="@color/colorAccent"

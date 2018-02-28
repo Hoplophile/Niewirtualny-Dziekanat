@@ -12,7 +12,6 @@ import android.webkit.WebViewClient;
 
 public class SyllabusActivity extends NavigationActivity {
 
-    private final String url="https://syllabuskrk.agh.edu.pl/2016-2017/pl/treasuries/academy_units/16/study_plans";
     private View progressBar, progressBarBackground;
 
     @Override
@@ -23,8 +22,7 @@ public class SyllabusActivity extends NavigationActivity {
         progressBar = findViewById(R.id.loading_progress);
         progressBarBackground = findViewById(R.id.progressbar_background);
 
-        final WebView syllabusView = findViewById(R.id.syllabus_view);
-        syllabusView.getSettings().setJavaScriptEnabled(true);                                      //TODO: enable JS
+        final WebView syllabusView = findViewById(R.id.syllabus_view);                                    //TODO: enable JS
         syllabusView.clearCache(true);
         syllabusView.clearHistory();
         syllabusView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
@@ -46,6 +44,7 @@ public class SyllabusActivity extends NavigationActivity {
             }
         });
 
+        String url = getIntent().getStringExtra("url");
         syllabusView.loadUrl(url);
 
         Toolbar toolbar = findViewById(R.id.toolbar);

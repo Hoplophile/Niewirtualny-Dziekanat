@@ -10,13 +10,8 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-/**
- * Created by piotr on 25.12.2017.
- */
-
 public class SkosActivity extends NavigationActivity {
 
-    private final String url="https://skos.agh.edu.pl/";
     private View progressBar, progressBarBackground;
 
     @Override
@@ -50,6 +45,7 @@ public class SkosActivity extends NavigationActivity {
             }
         });
 
+        String url="https://skos.agh.edu.pl/";
         skosView.loadUrl(url);
 
         Toolbar toolbar = findViewById(R.id.toolbar);

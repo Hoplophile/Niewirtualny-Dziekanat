@@ -1,31 +1,17 @@
 package com.example.piotr.niewirtualnydziekanat;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
-import android.location.Location;
-import android.location.LocationManager;
-import android.location.LocationProvider;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.Api;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.PendingResult;
-import com.google.android.gms.common.api.Status;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationResult;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -34,13 +20,13 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.maps.android.ui.IconGenerator;
 
-import java.io.FileDescriptor;
-import java.io.PrintWriter;
-import java.util.concurrent.TimeUnit;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 import static java.lang.Boolean.TRUE;
 
@@ -50,14 +36,7 @@ public class MapActivity extends NavigationActivity implements OnMapReadyCallbac
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     private static final LatLng DEFAULT_LOCATION = new LatLng(50.06666, 19.914048);
     private GoogleMap map;
-
-    String titles[] = {"A0", "A1", "H-A1", "A2", "H-A2", "A3", "A4", "C1", "C2", "C3", "C4", "U1", "U2"};
-    String snippets[] = {"Gmach Główny", "", "", "", "", "", "", "", "", "", "", "Biblioteka", "Centrum Dydaktyki"};
-    Double lat[] = {50.064546, 50.064855, 50.064391, 50.064970, 50.064498, 50.065111, 50.065188,
-            50.065568, 50.065960, 50.066122, 50.065964, 50.065686, 50.064600};
-    Double lng[] = {19.923313, 19.922477, 19.922278, 19.921768, 19.921553, 19.920699, 19.919946,
-            19.922773, 19.922479, 19.921674, 19.920283, 19.921505, 19.920527};
-
+    String json = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +45,7 @@ public class MapActivity extends NavigationActivity implements OnMapReadyCallbac
         setContentView(R.layout.activity_map);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                        .findFragmentById(R.id.map);
+                .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -89,32 +68,23 @@ public class MapActivity extends NavigationActivity implements OnMapReadyCallbac
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        
-        try {
-            // Customise the styling of the base map using a JSON object defined                    //TODO: button changing map type
-            // in a raw resource file.
-            boolean success = googleMap.setMapStyle(
-                    MapStyleOptions.loadRawResourceStyle(
-                            this, R.raw.style_json));
-        } catch (Resources.NotFoundException e) {}
+
+        try {                                                                                       //TODO: button changing map type
+            MapStyleOptions.loadRawResourceStyle(this, R.raw.style_json);
+        } catch (Resources.NotFoundException e) {
+            Log.e(e.toString(), "Google map style JSON file not found");
+        }
 
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(DEFAULT_LOCATION));
 
         updateLocationUI();
-
+                                                                                                    //TODO: button enabling/disabling icons
+                                                                                                    //TODO: searching buildings
         map = googleMap;
         map.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 
         getLocationPermission();
-
-        for(int i=0; i<titles.length; i++) {
-            IconGenerator iconGenerator = new IconGenerator(this);                          //TODO: button enabling/disabling icons
-            MarkerOptions markerOptions = new MarkerOptions()
-                    .icon(BitmapDescriptorFactory.fromBitmap(iconGenerator.makeIcon(titles[i])))
-                    .position(new LatLng(lat[i], lng[i]))
-                    .snippet(snippets[i]);
-            map.addMarker(markerOptions);
-        }
+        showMarkers();
     }
 
     private void getLocationPermission() {
@@ -133,6 +103,7 @@ public class MapActivity extends NavigationActivity implements OnMapReadyCallbac
                     PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
         }
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            @NonNull String permissions[],
@@ -162,7 +133,40 @@ public class MapActivity extends NavigationActivity implements OnMapReadyCallbac
                 map.getUiSettings().setMyLocationButtonEnabled(false);
                 getLocationPermission();
             }
-        } catch (SecurityException e)  {}
+        } catch (SecurityException e) {
+            Log.e(e.toString(), "Location update failed");
+        }
+    }
+
+    private void showMarkers(){
+        try {
+            InputStream is = getAssets().open("markers.json");
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.close();
+            json = new String(buffer, "UTF-8");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            JSONObject obj = new JSONObject(json);
+            JSONArray jsonArray = obj.getJSONArray("list");
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                IconGenerator iconGenerator = new IconGenerator(this);
+                MarkerOptions markerOptions = new MarkerOptions()
+                        .icon(BitmapDescriptorFactory.fromBitmap(
+                                iconGenerator.makeIcon(jsonObject.getString("title"))))
+                        .position(new LatLng(
+                                jsonObject.getDouble("lat"),
+                                jsonObject.getDouble("lng")));
+                map.addMarker(markerOptions);
+            }
+        } catch (org.json.JSONException e) {
+            Log.e(e.toString(), "Couldn't load notes");
+        }
     }
 }
 

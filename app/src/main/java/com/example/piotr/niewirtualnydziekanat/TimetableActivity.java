@@ -10,13 +10,8 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-/**
- * Created by piotr on 25.12.2017.
- */
-
 public class TimetableActivity extends NavigationActivity {
 
-    private final String url="http://planzajec.eaiib.agh.edu.pl";
     private View progressBar, progressBarBackground;
 
     @Override
@@ -31,7 +26,6 @@ public class TimetableActivity extends NavigationActivity {
         timetableView.clearCache(true);
         timetableView.clearHistory();
         timetableView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
-        timetableView.getSettings().setJavaScriptEnabled(true);
         timetableView.setWebViewClient(new WebViewClient(){
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
@@ -47,6 +41,7 @@ public class TimetableActivity extends NavigationActivity {
             }
         });
 
+        String url = getIntent().getStringExtra("url");
         timetableView.loadUrl(url);
 
         Toolbar toolbar = findViewById(R.id.toolbar);

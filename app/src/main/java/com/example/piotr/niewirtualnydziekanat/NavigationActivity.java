@@ -3,10 +3,9 @@ package com.example.piotr.niewirtualnydziekanat;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -47,7 +46,7 @@ public class NavigationActivity extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem  item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
@@ -65,10 +64,13 @@ public class NavigationActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_syllabus) {
             Intent intent = new Intent(context, SyllabusActivity.class);
+            intent.putExtra("url",
+                    "https://syllabuskrk.agh.edu.pl/2016-2017/pl/treasuries/academy_units/16/study_plans");
             startActivity(intent);
 
         } else if (id == R.id.nav_timetable) {
             Intent intent = new Intent(context, TimetableActivity.class);
+            intent.putExtra("url", "http://planzajec.eaiib.agh.edu.pl");
             startActivity(intent);
 
         } else if (id == R.id.nav_skos) {
@@ -96,14 +98,7 @@ public class NavigationActivity extends AppCompatActivity
             }
 
         } else if (id == R.id.nav_si_tech) {
-            Uri uri;
-            try {
-                ApplicationInfo applicationInfo =
-                        getPackageManager().getApplicationInfo("com.facebook.katana", 0);
-                uri = Uri.parse("fb://facewebmodal/f?href=https://www.facebook.com/agh.si.tech");
-            } catch (PackageManager.NameNotFoundException e) {
-                uri = Uri.parse("https://www.facebook.com/agh.si.tech");
-            }
+            Uri uri = Uri.parse("fb://facewebmodal/f?href=https://www.facebook.com/agh.si.tech");
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             startActivity(intent);
         }
