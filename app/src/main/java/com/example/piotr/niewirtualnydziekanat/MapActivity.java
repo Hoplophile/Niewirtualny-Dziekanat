@@ -1,5 +1,7 @@
 package com.example.piotr.niewirtualnydziekanat;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -78,8 +80,8 @@ public class MapActivity extends NavigationActivity implements OnMapReadyCallbac
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(DEFAULT_LOCATION));
 
         updateLocationUI();
-                                                                                                    //TODO: button enabling/disabling icons
-                                                                                                    //TODO: searching buildings
+                    //TODO: button enabling/disabling icons
+                            //TODO: searching buildings
         map = googleMap;
         map.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 
@@ -143,10 +145,11 @@ public class MapActivity extends NavigationActivity implements OnMapReadyCallbac
             InputStream is = getAssets().open("markers.json");
             int size = is.available();
             byte[] buffer = new byte[size];
+            is.read(buffer);
             is.close();
             json = new String(buffer, "UTF-8");
-        } catch (IOException ex) {
-            ex.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         try {
