@@ -1,7 +1,5 @@
 package com.example.piotr.niewirtualnydziekanat;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;

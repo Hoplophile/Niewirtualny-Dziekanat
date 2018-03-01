@@ -96,11 +96,6 @@ public class NavigationActivity extends AppCompatActivity
                 intent.setData(Uri.parse("https://dziekanat.agh.edu.pl/"));
                 startActivity(intent);
             }
-
-        } else if (id == R.id.nav_si_tech) {
-            Uri uri = Uri.parse("fb://facewebmodal/f?href=https://www.facebook.com/agh.si.tech");
-            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-            startActivity(intent);
         }
                                                                                                     //TODO activity with info about authors and app
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

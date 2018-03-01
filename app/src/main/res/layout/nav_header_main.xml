@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="130sp"
+    android:layout_height="121sp"
     android:background="#1A5076"
     android:orientation="horizontal"
     android:gravity="center"
-    android:paddingTop="19sp"
+    android:paddingTop="22sp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
