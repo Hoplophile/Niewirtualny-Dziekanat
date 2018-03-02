@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.piotr.niewirtualnydziekanat.OpenNewsActivity;
 import com.example.piotr.niewirtualnydziekanat.R;
 
 import org.apache.commons.lang3.StringUtils;
@@ -46,8 +47,8 @@ public class NewsAdapter extends ArrayAdapter<String> {
             public void onClick(View view) {
                 String appendix = StringUtils.substringBetween(item, "ref = \"", "\"><em>");
                 String url = "https://www.eaiib.agh.edu.pl/" + appendix.replaceAll("amp;", "");
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse(url));
+                Intent intent = new Intent(context, OpenNewsActivity.class);
+                intent.putExtra("url", url);
                 context.startActivity(intent);
             }
         });

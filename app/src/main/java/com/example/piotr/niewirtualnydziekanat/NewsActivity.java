@@ -32,6 +32,7 @@ public class NewsActivity extends NavigationActivity {
 
     private final Context context = NewsActivity.this;
     private ListView lv;
+    private View progressBar;
     private NewsActivity.News news = null;
     private final String ADDRESS = "https://www.eaiib.agh.edu.pl/aktualnosci.html";
 
@@ -41,6 +42,7 @@ public class NewsActivity extends NavigationActivity {
         setContentView(R.layout.activity_news);
 
         lv = findViewById(R.id.lv);
+        progressBar = findViewById(R.id.loading_progress);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -61,8 +63,8 @@ public class NewsActivity extends NavigationActivity {
         archiveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse("https://www.eaiib.agh.edu.pl/aktualnosci.html"));
+                Intent intent = new Intent(context, OpenNewsActivity.class);
+                intent.putExtra("url","https://www.eaiib.agh.edu.pl/aktualnosci.html&pg=1");
                 startActivity(intent);
             }
         });
@@ -115,6 +117,7 @@ public class NewsActivity extends NavigationActivity {
         @Override
         protected Boolean doInBackground(Void... params) {
             try {
+                progressBar.setVisibility(View.VISIBLE);
                 content = HttpGet(address);
                 content = StringUtils.substringBetween(content, "<h1>Aktualności</h1>", "ourPager");
                 String[] list = StringUtils.splitByWholeSeparator(content, "</li>");
@@ -135,6 +138,7 @@ public class NewsActivity extends NavigationActivity {
             }
             NewsAdapter adp = new NewsAdapter(context, adapterList);
             lv.setAdapter(adp);
+            progressBar.setVisibility(View.GONE);
         }
     }
 
