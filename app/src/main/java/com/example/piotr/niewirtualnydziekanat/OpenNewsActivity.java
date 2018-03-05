@@ -38,6 +38,7 @@ public class OpenNewsActivity extends NavigationActivity {
         progressBarBackground = findViewById(R.id.progressbar_background);
 
         final WebView newsView = findViewById(R.id.news_view);
+        newsView.setVisibility(View.GONE);
         newsView.getSettings().setJavaScriptEnabled(true);                                      //TODO: enable JS
         newsView.clearCache(true);
         newsView.clearHistory();
@@ -58,20 +59,31 @@ public class OpenNewsActivity extends NavigationActivity {
                             new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                             PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
                 }
-            }});
+            }
+        });
 
-        newsView.setWebViewClient(new WebViewClient(){
+        newsView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 progressBar.setVisibility(View.VISIBLE);
                 progressBarBackground.setVisibility(View.VISIBLE);
-                view.loadUrl(request.getUrl().toString());
                 return false;
             }
+
             @Override
-            public void onPageFinished(WebView webview, String url){
+            public void onPageFinished(WebView webview, String url) {
                 progressBar.setVisibility(View.GONE);
                 progressBarBackground.setVisibility(View.GONE);
+                webview.loadUrl("javascript:(function() { " +
+                        "document.getElementsByClassName('header')[0].style.display='none'; " +
+                        "document.getElementsByClassName('container')[1].style.display='none'; " +
+                        "document.getElementsByClassName('row')[9].style.display='none'; " +
+                        "document.getElementsByClassName('nav-search')[0].style.display='none'; " +
+                        "document.getElementsByClassName('bottom-nav')[0].style.display='none'; " +
+                        "document.getElementsByClassName('contact')[0].style.display='none'; " +
+                        "document.getElementsByClassName('footer')[0].style.display='none'; " +
+                        "})()");
+                webview.setVisibility(View.VISIBLE);
             }
         });
 
@@ -93,11 +105,11 @@ public class OpenNewsActivity extends NavigationActivity {
     }
 
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         final WebView newsView = findViewById(R.id.news_view);
-        if(newsView.canGoBack()){
+        if (newsView.canGoBack()) {
             newsView.goBack();
-        } else{
+        } else {
             super.onBackPressed();
         }
     }
