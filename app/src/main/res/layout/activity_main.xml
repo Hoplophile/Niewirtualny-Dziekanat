@@ -16,6 +16,10 @@
         android:fitsSystemWindows="true"
         tools:openDrawer="start">
 
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
         <LinearLayout
             android:id="@+id/button_list"
             android:layout_width="match_parent"
@@ -99,7 +103,8 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:layout_gravity="center"
-                android:gravity="center">
+                android:gravity="center"
+                android:padding="10dp">
 
                 <Button
                     android:layout_width="70sp"
@@ -116,6 +121,8 @@
             </LinearLayout>
 
         </LinearLayout>
+
+        </ScrollView>
 
         <include
             layout="@layout/app_bar_main"
