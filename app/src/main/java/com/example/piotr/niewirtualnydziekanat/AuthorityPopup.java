@@ -14,21 +14,44 @@ import android.widget.TextView;
 public class AuthorityPopup {
 
     String phone, mail;
+    private Dialog dialog;
 
     public void showDialog(final Activity activity, final Context context, String auth_name, String auth_role,
-                           String auth_phone, String auth_mail, Boolean photo_available, int id){
+                           String auth_phone, String auth_mail, Boolean photo_available, int id) {
 
-        final Dialog dialog = new Dialog(activity);
+        dialog = new Dialog(activity);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.custom_dialog);
 
+        fillDialog(context, auth_name, auth_role, auth_phone, auth_mail, photo_available, id);
+
+        dialog.show();
+    }
+
+    public void showDialogWithDutyHours(final Activity activity, final Context context, String auth_name, String auth_role,
+                                        String auth_phone, String auth_mail, Boolean photo_available, int id, String dutyHours) {
+
+        dialog = new Dialog(activity);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.custom_dialog_duty_hours);
+
+        fillDialog(context, auth_name, auth_role, auth_phone, auth_mail, photo_available, id);
+
+        final TextView dutyHoursField = dialog.findViewById(R.id.duty_hours);
+        dutyHoursField.setText(dutyHours);
+
+        dialog.show();
+    }
+
+    private void fillDialog(final Context context, String auth_name, String auth_role,
+                            String auth_phone, String auth_mail, Boolean photo_available, int id) {
         phone = auth_phone;
         mail = auth_mail;
 
-        if(photo_available){
+        if (photo_available) {
             final ImageView photo = dialog.findViewById(R.id.auth_photo);
             photo.setVisibility(View.VISIBLE);
-            switch (id){
+            switch (id) {
                 case 0:
                     photo.setImageResource(R.drawable.rs);
                     break;
@@ -74,11 +97,10 @@ public class AuthorityPopup {
         mailButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:"+mail));
+                Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + mail));
                 intent.putExtra(android.content.Intent.EXTRA_EMAIL, mail);
                 context.startActivity(Intent.createChooser(intent, "Send via email"));
             }
         });
-        dialog.show();
     }
 }

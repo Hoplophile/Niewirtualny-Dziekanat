@@ -43,6 +43,8 @@ public class AuthoritiesActivity extends NavigationActivity {
             "biomed@agh.edu.pl", "fraczek@agh.edu.pl"};
     String others_mail[] = {"foszczka@agh.edu.pl", "sara@agh.edu.pl"};
     String ext_mail[] = {"jasuba@agh.edu.pl"};
+    String duty_hours[] = {"środa: 10.45-11.45\nczwartek: 12.00-13.00", "wtorek: 13.00-14.00", "wtorek: 12.30-14.30",
+    "wtorek: 11.00-12.00\npiątek: 11.30-12.30", "poniedziałek: 11.00-12.00\npiątek 14.00-15.00"};
 
     private final Context context = AuthoritiesActivity.this;
     private final Activity activity = this;
@@ -96,10 +98,18 @@ public class AuthoritiesActivity extends NavigationActivity {
 
                     int id = child.getId();
                     if(layout == deanLayout){
-                        AuthorityPopup authorityPopup = new AuthorityPopup();
-                        authorityPopup.showDialog(activity, context, dean_full_name[id],
-                                dean_role[id], dean_tel[id],
-                                dean_mail[id], Boolean.TRUE, id);
+                        if(id==0 || id==6) {
+                            AuthorityPopup authorityPopup = new AuthorityPopup();
+                            authorityPopup.showDialog(activity, context, dean_full_name[id],
+                                    dean_role[id], dean_tel[id],
+                                    dean_mail[id], Boolean.TRUE, id);
+                        } else {
+                            AuthorityPopup authorityPopup = new AuthorityPopup();
+                            authorityPopup.showDialogWithDutyHours(activity, context, dean_full_name[id],
+                                    dean_role[id], dean_tel[id],
+                                    dean_mail[id], Boolean.TRUE, id,
+                                    duty_hours[id-1]);
+                        }
                     } else if(layout == authoritiesLayout){
                         AuthorityPopup authorityPopup = new AuthorityPopup();
                         authorityPopup.showDialog(activity, context, auth_name[id],

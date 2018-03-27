@@ -5,7 +5,6 @@ import android.app.DownloadManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
@@ -65,15 +64,14 @@ public class OpenNewsActivity extends NavigationActivity {
         newsView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                newsView.setVisibility(View.GONE);
                 progressBar.setVisibility(View.VISIBLE);
                 progressBarBackground.setVisibility(View.VISIBLE);
                 return false;
             }
 
             @Override
-            public void onPageFinished(WebView webview, String url) {
-                progressBar.setVisibility(View.GONE);
-                progressBarBackground.setVisibility(View.GONE);
+            public void onLoadResource(WebView webview, String url) {
                 webview.loadUrl("javascript:(function() { " +
                         "document.getElementsByClassName('header')[0].style.display='none'; " +
                         "document.getElementsByClassName('container')[1].style.display='none'; " +
@@ -83,6 +81,12 @@ public class OpenNewsActivity extends NavigationActivity {
                         "document.getElementsByClassName('contact')[0].style.display='none'; " +
                         "document.getElementsByClassName('footer')[0].style.display='none'; " +
                         "})()");
+            }
+
+            @Override
+            public void onPageFinished(WebView webview, String url) {
+                progressBar.setVisibility(View.GONE);
+                progressBarBackground.setVisibility(View.GONE);
                 webview.setVisibility(View.VISIBLE);
             }
         });

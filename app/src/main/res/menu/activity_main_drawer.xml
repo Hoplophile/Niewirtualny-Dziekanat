@@ -17,6 +17,12 @@
             android:id="@+id/nav_opening_hours"
             android:icon="@drawable/opening_hours_ic"
             android:title="Godziny otwarcia" />
+
+        <!-- TODO: add icon! -->
+        <item
+            android:id="@+id/nav_news"
+            android:title="Aktualności" />
+
         <item
             android:id="@+id/nav_syllabus"
             android:icon="@drawable/syllabus_ic"

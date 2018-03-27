@@ -15,7 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 public class NavigationActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener{
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     Context context = NavigationActivity.this;
 
@@ -46,7 +46,7 @@ public class NavigationActivity extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem  item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
@@ -60,6 +60,10 @@ public class NavigationActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_opening_hours) {
             Intent intent = new Intent(context, OpeningHoursActivity.class);
+            startActivity(intent);
+
+        } else if (id == R.id.nav_news) {
+            Intent intent = new Intent(context, NewsActivity.class);
             startActivity(intent);
 
         } else if (id == R.id.nav_syllabus) {
@@ -87,17 +91,17 @@ public class NavigationActivity extends AppCompatActivity
             startActivity(intent);
 
         } else if (id == R.id.nav_wu) {
-            try{
+            try {
                 Intent intent = context.getPackageManager()
                         .getLaunchIntentForPackage("pl.janpogocki.agh.wirtualnydziekanat");
                 context.startActivity(intent);
-            } catch (ActivityNotFoundException |NullPointerException e) {
+            } catch (ActivityNotFoundException | NullPointerException e) {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse("https://dziekanat.agh.edu.pl/"));
                 startActivity(intent);
             }
         }
-                                                                                                    //TODO activity with info about authors and app
+        //TODO activity with info about authors and app
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
