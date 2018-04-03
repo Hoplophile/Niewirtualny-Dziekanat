@@ -9,6 +9,8 @@ import android.view.View;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
+import android.widget.RelativeLayout;
 
 public class TimetableActivity extends NavigationActivity {
 
@@ -22,12 +24,30 @@ public class TimetableActivity extends NavigationActivity {
         progressBar = findViewById(R.id.loading_progress);
         progressBarBackground = findViewById(R.id.progressbar_background);
 
+        //TODO: add proper action to buttons!
+        final Button star_border = findViewById(R.id.star_border);
+        final Button star = findViewById(R.id.star);
+        star_border.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                star.setVisibility(View.VISIBLE);
+                star_border.setVisibility(View.GONE);
+            }
+        });
+        star.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                star.setVisibility(View.GONE);
+                star_border.setVisibility(View.VISIBLE);
+            }
+        });
+
         final WebView timetableView = findViewById(R.id.timetable_view);                            //TODO: enable JS
         timetableView.clearCache(true);
         timetableView.clearHistory();
         timetableView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
         timetableView.getSettings().setJavaScriptEnabled(true);
-        timetableView.setWebViewClient(new WebViewClient(){
+        timetableView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 view.loadUrl(request.getUrl().toString());
@@ -35,17 +55,21 @@ public class TimetableActivity extends NavigationActivity {
                 progressBarBackground.setVisibility(View.VISIBLE);
                 return false;
             }
+
             @Override
-            public void onPageFinished(WebView webview, String url){
+            public void onPageFinished(WebView webview, String url) {
                 progressBar.setVisibility(View.GONE);
                 progressBarBackground.setVisibility(View.GONE);
+                //TODO: check fav timetable
+                star.setVisibility(View.GONE);
+                star_border.setVisibility(View.VISIBLE);
             }
         });
 
         String url = getIntent().getStringExtra("url");
         timetableView.loadUrl(url);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        final Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -57,14 +81,15 @@ public class TimetableActivity extends NavigationActivity {
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
+
     }
 
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         final WebView timetableView = findViewById(R.id.timetable_view);
-        if(timetableView.canGoBack()){
+        if (timetableView.canGoBack()) {
             timetableView.goBack();
-        } else{
+        } else {
             super.onBackPressed();
         }
     }

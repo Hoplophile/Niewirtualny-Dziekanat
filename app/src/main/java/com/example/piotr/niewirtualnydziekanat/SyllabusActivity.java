@@ -9,6 +9,7 @@ import android.view.View;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
 
 public class SyllabusActivity extends NavigationActivity {
 
@@ -22,12 +23,30 @@ public class SyllabusActivity extends NavigationActivity {
         progressBar = findViewById(R.id.loading_progress);
         progressBarBackground = findViewById(R.id.progressbar_background);
 
+        //TODO: add proper action to buttons!
+        final Button star_border = findViewById(R.id.star_border);
+        final Button star = findViewById(R.id.star);
+        star_border.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                star.setVisibility(View.VISIBLE);
+                star_border.setVisibility(View.GONE);
+            }
+        });
+        star.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                star.setVisibility(View.GONE);
+                star_border.setVisibility(View.VISIBLE);
+            }
+        });
+
         final WebView syllabusView = findViewById(R.id.syllabus_view);
         syllabusView.getSettings().setJavaScriptEnabled(true);                                      //TODO: enable JS
         syllabusView.clearCache(true);
         syllabusView.clearHistory();
         syllabusView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
-        syllabusView.setWebViewClient(new WebViewClient(){
+        syllabusView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 progressBar.setVisibility(View.VISIBLE);
@@ -35,12 +54,16 @@ public class SyllabusActivity extends NavigationActivity {
                 view.loadUrl(request.getUrl().toString());
                 return false;
             }
+
             @Override
-            public void onPageFinished(WebView webview, String url){
+            public void onPageFinished(WebView webview, String url) {
                 //webview.loadUrl("javascript:(function() { document.getElementsByTagName" +
                 //        "('main-content')[0].style.display=\"none\"; })()");
                 progressBar.setVisibility(View.GONE);
                 progressBarBackground.setVisibility(View.GONE);
+                //TODO: check fav syllabus
+                star.setVisibility(View.GONE);
+                star_border.setVisibility(View.VISIBLE);
             }
         });
 
@@ -62,11 +85,11 @@ public class SyllabusActivity extends NavigationActivity {
     }
 
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         final WebView syllabusView = findViewById(R.id.syllabus_view);
-        if(syllabusView.canGoBack()){
+        if (syllabusView.canGoBack()) {
             syllabusView.goBack();
-        } else{
+        } else {
             super.onBackPressed();
         }
     }
