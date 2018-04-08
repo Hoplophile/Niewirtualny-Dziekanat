@@ -1,5 +1,8 @@
 package com.example.piotr.niewirtualnydziekanat;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -12,24 +15,41 @@ import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
+import java.sql.Time;
+
 public class TimetableActivity extends NavigationActivity {
 
+    private final Context context = TimetableActivity.this;
     private View progressBar, progressBarBackground;
+    private SharedPreferences timetableUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timetable);
+        timetableUrl = this.getPreferences(Context.MODE_PRIVATE);
 
         progressBar = findViewById(R.id.loading_progress);
         progressBarBackground = findViewById(R.id.progressbar_background);
 
-        //TODO: add proper action to buttons!
+        final WebView timetableView = findViewById(R.id.timetable_view);                            //TODO: enable JS
+        timetableView.clearCache(true);
+        timetableView.clearHistory();
+        timetableView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+        timetableView.getSettings().setJavaScriptEnabled(true);
+
         final Button star_border = findViewById(R.id.star_border);
         final Button star = findViewById(R.id.star);
         star_border.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SharedPreferences.Editor edit = timetableUrl.edit();
+                edit.putString("timetable url", timetableView.getUrl());
+                edit.commit();
+                Intent intent = new Intent(context, MainActivity.class);
+                intent.putExtra("timetable url", timetableView.getUrl());
+                intent.putExtra("timetable message", "Ustawiono Twój plan zajęć");
+                startActivity(intent);
                 star.setVisibility(View.VISIBLE);
                 star_border.setVisibility(View.GONE);
             }
@@ -37,16 +57,18 @@ public class TimetableActivity extends NavigationActivity {
         star.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SharedPreferences.Editor edit = timetableUrl.edit();
+                edit.putString("timetable url", timetableView.getUrl());
+                edit.commit();
+                Intent intent = new Intent(context, MainActivity.class);
+                intent.putExtra("timetable url", "");
+                intent.putExtra("timetable message", "Usunięto Twój plan zajęć");
+                startActivity(intent);
                 star.setVisibility(View.GONE);
                 star_border.setVisibility(View.VISIBLE);
             }
         });
 
-        final WebView timetableView = findViewById(R.id.timetable_view);                            //TODO: enable JS
-        timetableView.clearCache(true);
-        timetableView.clearHistory();
-        timetableView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
-        timetableView.getSettings().setJavaScriptEnabled(true);
         timetableView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
@@ -60,9 +82,13 @@ public class TimetableActivity extends NavigationActivity {
             public void onPageFinished(WebView webview, String url) {
                 progressBar.setVisibility(View.GONE);
                 progressBarBackground.setVisibility(View.GONE);
-                //TODO: check fav timetable
-                star.setVisibility(View.GONE);
-                star_border.setVisibility(View.VISIBLE);
+                if (timetableUrl.getString("timetable url", "").equals(url)) {
+                    star.setVisibility(View.VISIBLE);
+                    star_border.setVisibility(View.GONE);
+                } else {
+                    star.setVisibility(View.GONE);
+                    star_border.setVisibility(View.VISIBLE);
+                }
             }
         });
 
@@ -81,7 +107,6 @@ public class TimetableActivity extends NavigationActivity {
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
-
     }
 
     @Override

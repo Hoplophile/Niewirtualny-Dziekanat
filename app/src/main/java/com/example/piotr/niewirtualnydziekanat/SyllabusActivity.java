@@ -1,5 +1,8 @@
 package com.example.piotr.niewirtualnydziekanat;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -13,22 +16,37 @@ import android.widget.Button;
 
 public class SyllabusActivity extends NavigationActivity {
 
+    private final Context context = SyllabusActivity.this;
     private View progressBar, progressBarBackground;
+    private SharedPreferences syllabusUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_syllabus);
+        syllabusUrl = this.getPreferences(Context.MODE_PRIVATE);
 
         progressBar = findViewById(R.id.loading_progress);
         progressBarBackground = findViewById(R.id.progressbar_background);
 
-        //TODO: add proper action to buttons!
+        final WebView syllabusView = findViewById(R.id.syllabus_view);
+        syllabusView.getSettings().setJavaScriptEnabled(true);                                      //TODO: enable JS
+        syllabusView.clearCache(true);
+        syllabusView.clearHistory();
+        syllabusView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+
         final Button star_border = findViewById(R.id.star_border);
         final Button star = findViewById(R.id.star);
         star_border.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SharedPreferences.Editor edit = syllabusUrl.edit();
+                edit.putString("syllabus url", syllabusView.getUrl());
+                edit.commit();
+                Intent intent = new Intent(context, MainActivity.class);
+                intent.putExtra("syllabus url", syllabusView.getUrl());
+                intent.putExtra("syllabus message", "Ustawiono Twój syllabus");
+                startActivity(intent);
                 star.setVisibility(View.VISIBLE);
                 star_border.setVisibility(View.GONE);
             }
@@ -36,16 +54,18 @@ public class SyllabusActivity extends NavigationActivity {
         star.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SharedPreferences.Editor edit = syllabusUrl.edit();
+                edit.putString("syllabus url", "");
+                edit.commit();
+                Intent intent = new Intent(context, MainActivity.class);
+                intent.putExtra("syllabus url", "");
+                intent.putExtra("syllabus message", "Usunięto Twój syllabus");
+                startActivity(intent);
                 star.setVisibility(View.GONE);
                 star_border.setVisibility(View.VISIBLE);
             }
         });
 
-        final WebView syllabusView = findViewById(R.id.syllabus_view);
-        syllabusView.getSettings().setJavaScriptEnabled(true);                                      //TODO: enable JS
-        syllabusView.clearCache(true);
-        syllabusView.clearHistory();
-        syllabusView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
         syllabusView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
@@ -61,9 +81,13 @@ public class SyllabusActivity extends NavigationActivity {
                 //        "('main-content')[0].style.display=\"none\"; })()");
                 progressBar.setVisibility(View.GONE);
                 progressBarBackground.setVisibility(View.GONE);
-                //TODO: check fav syllabus
-                star.setVisibility(View.GONE);
-                star_border.setVisibility(View.VISIBLE);
+                if (syllabusUrl.getString("syllabus url", "").equals(url)) {
+                    star.setVisibility(View.VISIBLE);
+                    star_border.setVisibility(View.GONE);
+                } else {
+                    star.setVisibility(View.GONE);
+                    star_border.setVisibility(View.VISIBLE);
+                }
             }
         });
 

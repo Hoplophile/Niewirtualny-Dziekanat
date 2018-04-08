@@ -3,6 +3,7 @@ package com.example.piotr.niewirtualnydziekanat;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -16,21 +17,45 @@ import android.widget.Toast;
 public class MainActivity extends NavigationActivity {
 
     private final Context context = MainActivity.this;
+    private String syllabusUrl;
+    private String timetableUrl;
+    private SharedPreferences urls;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        urls = this.getPreferences(Context.MODE_PRIVATE);
+
+        syllabusUrl = getIntent().getStringExtra("syllabus url");
+        if (syllabusUrl != null) {
+            Toast.makeText(context, getIntent().getStringExtra("syllabus message"), Toast.LENGTH_SHORT).show();
+            SharedPreferences.Editor edit = urls.edit();
+            edit.putString("syllabus url", syllabusUrl);
+            edit.commit();
+        } else {
+            syllabusUrl = urls.getString("syllabus url", "");
+        }
+
+        timetableUrl = getIntent().getStringExtra("timetable url");
+        if (timetableUrl != null) {
+            Toast.makeText(context, getIntent().getStringExtra("timetable message"), Toast.LENGTH_SHORT).show();
+            SharedPreferences.Editor edit = urls.edit();
+            edit.putString("timetable url", timetableUrl);
+            edit.commit();
+        } else {
+            timetableUrl = urls.getString("timetable url", "");
+        }
 
         Button deaneryWebsiteButton = findViewById(R.id.virtual_deanery);
         deaneryWebsiteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try{
+                try {
                     Intent intent = context.getPackageManager()
                             .getLaunchIntentForPackage("pl.janpogocki.agh.wirtualnydziekanat");
                     context.startActivity(intent);
-                } catch (ActivityNotFoundException|NullPointerException e) {
+                } catch (ActivityNotFoundException | NullPointerException e) {
                     Intent intent = new Intent(Intent.ACTION_VIEW);
                     intent.setData(Uri.parse("https://dziekanat.agh.edu.pl/"));
                     startActivity(intent);
@@ -69,10 +94,13 @@ public class MainActivity extends NavigationActivity {
         favTimetableButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context,TimetableActivity.class);
-                intent.putExtra("url",
-                        "http://planzajec.eaiib.agh.edu.pl/view/timetable/330?date=2018-02-26");
-                startActivity(intent);
+                if (timetableUrl == null || timetableUrl.equals("")) {
+                    Toast.makeText(context, "Nie wybrałeś swojego planu zajęć", Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent intent = new Intent(context, TimetableActivity.class);
+                    intent.putExtra("url", timetableUrl);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -80,7 +108,13 @@ public class MainActivity extends NavigationActivity {
         favSyllabusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "Nie wybrałeś swojego syllabusa", Toast.LENGTH_SHORT).show();
+                if (syllabusUrl == null || syllabusUrl.equals("")) {
+                    Toast.makeText(context, "Nie wybrałeś swojego syllabusa", Toast.LENGTH_SHORT).show();
+                } else {
+                    Intent intent = new Intent(context, SyllabusActivity.class);
+                    intent.putExtra("url", syllabusUrl);
+                    startActivity(intent);
+                }
             }
         });
 
