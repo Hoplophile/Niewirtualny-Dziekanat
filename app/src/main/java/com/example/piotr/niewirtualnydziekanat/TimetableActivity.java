@@ -33,10 +33,10 @@ public class TimetableActivity extends NavigationActivity {
         progressBarBackground = findViewById(R.id.progressbar_background);
 
         final WebView timetableView = findViewById(R.id.timetable_view);                            //TODO: enable JS
+        timetableView.getSettings().setJavaScriptEnabled(true);                                      //TODO: enable JS
         timetableView.clearCache(true);
         timetableView.clearHistory();
         timetableView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
-        timetableView.getSettings().setJavaScriptEnabled(true);
 
         final Button star_border = findViewById(R.id.star_border);
         final Button star = findViewById(R.id.star);
@@ -58,7 +58,7 @@ public class TimetableActivity extends NavigationActivity {
             @Override
             public void onClick(View view) {
                 SharedPreferences.Editor edit = timetableUrl.edit();
-                edit.putString("timetable url", timetableView.getUrl());
+                edit.putString("timetable url", "");
                 edit.commit();
                 Intent intent = new Intent(context, MainActivity.class);
                 intent.putExtra("timetable url", "");
@@ -72,9 +72,9 @@ public class TimetableActivity extends NavigationActivity {
         timetableView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                view.loadUrl(request.getUrl().toString());
                 progressBar.setVisibility(View.VISIBLE);
                 progressBarBackground.setVisibility(View.VISIBLE);
+                view.loadUrl(request.getUrl().toString());
                 return false;
             }
 
@@ -82,7 +82,7 @@ public class TimetableActivity extends NavigationActivity {
             public void onPageFinished(WebView webview, String url) {
                 progressBar.setVisibility(View.GONE);
                 progressBarBackground.setVisibility(View.GONE);
-                if (timetableUrl.getString("timetable url", "").equals(url)) {
+                if (checkIfUrlsEqual(timetableUrl.getString("timetable url", ""), url)) {
                     star.setVisibility(View.VISIBLE);
                     star_border.setVisibility(View.GONE);
                 } else {
@@ -95,7 +95,7 @@ public class TimetableActivity extends NavigationActivity {
         String url = getIntent().getStringExtra("url");
         timetableView.loadUrl(url);
 
-        final Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -117,5 +117,11 @@ public class TimetableActivity extends NavigationActivity {
         } else {
             super.onBackPressed();
         }
+    }
+
+    private boolean checkIfUrlsEqual(String url1, String url2) {
+        int index1 = url1.indexOf("?date");
+        int index2 = url2.indexOf("?date");
+        return url1.substring(0, index1).equals(url2.substring(0, index2));
     }
 }
